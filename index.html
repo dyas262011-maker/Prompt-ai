@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Claudrya Prompt Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- AUDIO INTRO -->
+<audio id="introAudio" preload="auto"></audio>
+
+<!-- ============================================================
+     WELCOME SCREEN
+     ============================================================ -->
+<div id="welcome">
+  <div class="w-bg"></div>
+  <div class="w-grid"></div>
+  <div class="w-scan"></div>
+  <div class="w-noise"></div>
+  <div class="w-orb w-orb-1"></div>
+  <div class="w-orb w-orb-2"></div>
+  <div class="w-particles" id="wPts"></div>
+  <div class="w-bracket tl"></div>
+  <div class="w-bracket tr"></div>
+  <div class="w-bracket bl"></div>
+  <div class="w-bracket br"></div>
+  <div class="w-status-line">
+    <div class="w-dot"></div>
+    <span>CLAUDRYA.PROMPT // LIVE</span>
+  </div>
+  <div class="w-inner">
+    <div class="w-pill">
+      <div class="w-pill-dot"></div>
+      PLATFORM PROMPT AI #1
+    </div>
+    <div class="w-lines">
+      <span class="w-line w-line-1">SELAMAT</span>
+      <span class="w-line w-line-2">DATANG</span>
+      <span class="w-line w-line-3">di Claudrya</span>
+      <span class="w-line w-line-4">Prompt Hub<span class="w-cursor"></span></span>
+    </div>
+    <p class="w-desc">Koleksi prompt premium untuk semua AI. Gratis, lengkap, dan selalu update.</p>
+    <div class="w-cta">
+      <button class="w-btn" id="wBtn">&#9658; MULAI JELAJAHI</button>
+      <button class="w-skip" id="wSkip">SKIP --></button>
+    </div>
+    <button class="w-audio-ctrl" id="wAudioBtn" onclick="toggleIntroAudio()">
+      <div class="w-audio-box" id="wAudioBox">&#9654;</div>
+      <div class="w-vbars stopped" id="wVBars">
+        <div class="w-vbar"></div><div class="w-vbar"></div>
+        <div class="w-vbar"></div><div class="w-vbar"></div>
+        <div class="w-vbar"></div>
+      </div>
+      <span id="wAudioTxt">PUTAR AUDIO</span>
+    </button>
+  </div>
+  <div class="w-progress"><div class="w-progress-fill"></div></div>
+</div>
+
+<!-- ============================================================
+     APP
+     ============================================================ -->
+<div id="app">
+
+<!-- SYNC BAR -->
+<div class="sync-bar" id="syncBar">// MENGHUBUNGKAN KE DATABASE...</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="nav-logo" id="navLogo">
+      <div class="logo-box" id="logoBox">CP</div>
+      <div class="logo-text" id="logoText">Claudrya<span>.Prompt</span></div>
+    </div>
+    <div class="nav-tabs">
+      <button class="ntab on" onclick="gp('home')">Home</button>
+      <button class="ntab" onclick="gp('jb')">Jailbreak</button>
+      <button class="ntab" onclick="gp('foto')">Foto</button>
+    </div>
+    <div class="nav-r">
+      <button class="nbtn" onclick="toggleTheme()" id="tBtn" title="Toggle Theme">[D]</button>
+      <button class="nbtn" onclick="gp('fav')" title="Favorit">
+        [*]<span class="nbadge" id="fBadge">0</span>
+      </button>
+      <button class="nbtn" onclick="openSrch()" title="Cari">[?]</button>
+      <button class="nav-add" onclick="openAdd()">[+] Tambah</button>
+      <button class="hbg" id="hbg" onclick="toggleMob()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOB OVERLAY & MENU -->
+<div class="mob-ov" id="mobOv" onclick="closeMob()"></div>
+<div class="nav-mob" id="navMob">
+  <button class="nm-btn on" onclick="gp('home');closeMob()">> Home</button>
+  <button class="nm-btn" onclick="gp('jb');closeMob()">> Jailbreak</button>
+  <button class="nm-btn" onclick="gp('foto');closeMob()">> Foto</button>
+  <button class="nm-btn" onclick="gp('fav');closeMob()">> Favorit</button>
+  <button class="nm-add" onclick="openAdd();closeMob()">[+] Tambah Prompt</button>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="srch-bar" id="srchBar" style="display:none">
+  <div class="srch-in">
+    <span>[?]</span>
+    <input id="srchInp" placeholder="// cari prompt..." oninput="doSrch(this.value)"/>
+    <button onclick="closeSrch()">[X]</button>
+  </div>
+</div>
+
+<!-- ======================================================
+     PAGE: HOME
+     ====================================================== -->
+<div class="page on" id="pgHome">
+  <div class="h-hero">
+    <div class="h-hero-grid"></div>
+    <div class="h-hero-bar"></div>
+    <div class="h-in">
+      <div class="h-eyebrow" id="hEyebrow">Platform Prompt AI</div>
+      <h1 class="h-title" id="hTitle">Claudrya <span>Prompt</span></h1>
+      <p class="h-sub" id="hSub">// Temukan dan bagikan prompt AI terbaik<br/>// Siapa saja bisa berkontribusi &mdash; real-time untuk semua</p>
+      <div class="h-stats">
+        <div class="hst"><strong id="cntJb">0</strong><span>Jailbreak</span></div>
+        <div class="hst"><strong id="cntFt">0</strong><span>Foto</span></div>
+        <div class="hst"><strong id="cntFv">0</strong><span>Favorit</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:860px;margin:0 auto;padding:1.5rem 1.2rem 0">
+    <div class="h-cards">
+      <div class="h-card" onclick="gp('jb')">
+        <div class="hc-num">01</div>
+        <span class="hc-label">// Collection</span>
+        <button class="h-card-add" onclick="event.stopPropagation();openAdd('jb')">[+]</button>
+        <h3>Prompt Jailbreak</h3>
+        <p>Koleksi prompt untuk unlock potensi penuh AI favoritmu. Siapa saja bisa berbagi.</p>
+        <div class="h-card-link">Jelajahi</div>
+      </div>
+      <div class="h-card" onclick="gp('foto')">
+        <div class="hc-num">02</div>
+        <span class="hc-label">// Gallery</span>
+        <button class="h-card-add" onclick="event.stopPropagation();openAdd('foto')">[+]</button>
+        <h3>Prompt Foto</h3>
+        <p>Hasilkan gambar AI memukau dengan prompt terkurasi dari komunitas.</p>
+        <div class="h-card-link">Jelajahi</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:2rem">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-eyebrow">// Terbaru</div>
+        <div class="sec-title">Prompt Terbaru</div>
+      </div>
+      <button class="btn-sm" onclick="openAdd()">[+] Tambah</button>
+    </div>
+    <div class="plist" id="homeList"></div>
+  </div>
+</div>
+
+<!-- ======================================================
+     PAGE: JAILBREAK
+     ====================================================== -->
+<div class="page" id="pgJb">
+  <div class="ph">
+    <div class="ph-bar"></div>
+    <div class="ph-in">
+      <div class="ph-tag">// Jailbreak Collection</div>
+      <h1>Prompt <em>Jailbreak</em></h1>
+      <p>Kumpulan prompt premium. Siapa saja bisa berbagi &mdash; semua orang bisa melihat secara real-time.</p>
+      <div class="ph-bot">
+        <div class="ph-cnt" id="jbTotal">// 0 Prompt</div>
+        <button class="ph-add" onclick="openAdd('jb')">[+] Tambah Prompt</button>
+      </div>
+    </div>
+  </div>
+  <div class="pbody">
+    <div class="f-row">
+      <div class="f-pills" id="jbPills">
+        <button class="fpill on" onclick="fJb('semua',this)">ALL <span class="fc" id="jbAllN">0</span></button>
+      </div>
+      <select class="srt-sel" onchange="sJb(this.value)">
+        <option value="baru">// Terbaru</option>
+        <option value="pop">// Terpopuler</option>
+        <option value="az">// A-Z</option>
+      </select>
+    </div>
+    <div class="psrch">
+      <span>[?]</span>
+      <input id="jbSI" placeholder="// cari prompt jailbreak..." oninput="qJb(this.value)"/>
+    </div>
+    <div class="rmeta"><span class="rcnt" id="jbInfo">// 0 prompt</span></div>
+    <div class="plist" id="jbList"></div>
+    <div class="empty" id="jbEmpty" style="display:none">
+      <div class="empty-code">
+        <span>// STATUS: 404_NOT_FOUND</span><br/>
+        <span>// COLLECTION: jailbreak</span><br/>
+        <span>// MSG: "belum ada prompt"</span>
+      </div>
+      <div class="empty-ttl">Belum Ada Prompt</div>
+      <p>Jadilah yang pertama berbagi prompt jailbreak!</p>
+      <button class="empty-add" onclick="openAdd('jb')">[+] Tambah Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     PAGE: FOTO
+     ====================================================== -->
+<div class="page" id="pgFoto">
+  <div class="ph">
+    <div class="ph-bar"></div>
+    <div class="ph-in">
+      <div class="ph-tag" style="border-color:var(--acc);color:var(--acc);box-shadow:2px 2px 0 var(--acc)">// Foto Collection</div>
+      <h1>Prompt <em style="color:var(--acc)">Foto</em></h1>
+      <p>Hasilkan gambar AI memukau. Bagikan promptmu dengan semua orang!</p>
+      <div class="ph-bot">
+        <div class="ph-cnt" id="ftTotal">// 0 Prompt</div>
+        <button class="ph-add" onclick="openAdd('foto')">[+] Tambah Prompt</button>
+      </div>
+    </div>
+  </div>
+  <div class="pbody">
+    <div class="f-row">
+      <div class="f-pills" id="ftPills">
+        <button class="fpill on" onclick="fFt('semua',this)">ALL <span class="fc" id="ftAllN">0</span></button>
+      </div>
+      <select class="srt-sel" onchange="sFt(this.value)">
+        <option value="baru">// Terbaru</option>
+        <option value="pop">// Terpopuler</option>
+        <option value="az">// A-Z</option>
+      </select>
+    </div>
+    <div class="psrch">
+      <span>[?]</span>
+      <input id="ftSI" placeholder="// cari prompt foto..." oninput="qFt(this.value)"/>
+    </div>
+    <div class="rmeta"><span class="rcnt" id="ftInfo">// 0 prompt</span></div>
+    <div class="fgrid" id="ftGrid"></div>
+    <div class="empty" id="ftEmpty" style="display:none">
+      <div class="empty-code">
+        <span>// STATUS: 404_NOT_FOUND</span><br/>
+        <span>// COLLECTION: foto</span>
+      </div>
+      <div class="empty-ttl">Belum Ada Foto</div>
+      <p>Bagikan prompt foto terbaikmu!</p>
+      <button class="empty-add" onclick="openAdd('foto')">[+] Tambah Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     PAGE: FAVORIT
+     ====================================================== -->
+<div class="page" id="pgFav">
+  <div class="ph">
+    <div class="ph-bar"></div>
+    <div class="ph-in">
+      <div class="ph-tag" style="border-color:var(--gold);color:var(--gold);box-shadow:2px 2px 0 var(--gold)">// Favorit</div>
+      <h1>Koleksi <em style="color:var(--gold)">Favorit</em></h1>
+      <p>Prompt yang kamu simpan (tersimpan di browser kamu).</p>
+    </div>
+  </div>
+  <div class="pbody">
+    <div class="plist" id="favList"></div>
+    <div class="empty" id="favEmpty" style="display:none">
+      <div class="empty-code">
+        <span>// STATUS: EMPTY</span><br/>
+        <span>// MSG: "belum ada favorit"</span>
+      </div>
+      <div class="empty-ttl">Belum Ada Favorit</div>
+      <p>Tekan [*] di prompt untuk menyimpan ke favorit.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     PAGE: SEARCH
+     ====================================================== -->
+<div class="page" id="pgSearch">
+  <div class="pbody" style="padding-top:1.2rem">
+    <div class="rcnt" id="srInfo" style="margin-bottom:.9rem">// ketik untuk mencari...</div>
+    <div class="plist" id="srList"></div>
+    <div class="empty" id="srEmpty" style="display:none">
+      <div class="empty-code"><span>// STATUS: NO_RESULTS</span></div>
+      <div class="empty-ttl">Tidak Ditemukan</div>
+      <p>Coba kata kunci yang berbeda.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- ============================================================
+     MODAL: TAMBAH PROMPT
+     ============================================================ -->
+<div class="modal" id="mAdd" onclick="if(event.target===this)cm('mAdd')">
+  <div class="mbox">
+    <button class="mc" onclick="cm('mAdd')">[X]</button>
+    <div class="m-ttl">[+] Tambah Prompt</div>
+    <p class="m-sub">// Siapa saja bisa berbagi &mdash; langsung terlihat semua orang secara real-time</p>
+    <div class="type-tabs">
+      <button class="type-tab on" id="typJb" onclick="swType('jb')">[ Jailbreak ]</button>
+      <button class="type-tab" id="typFt" onclick="swType('foto')">[ Foto ]</button>
+    </div>
+    <div class="fw">
+      <div class="fg"><label>Nama Kamu (opsional)</label><input id="addNm" placeholder="// nama atau username..."/></div>
+      <div class="fg"><label>Judul Prompt *</label><input id="addTi" placeholder="// nama prompt..."/></div>
+      <div class="fg"><label>Deskripsi</label><input id="addDe" placeholder="// jelaskan kegunaan prompt ini..."/></div>
+      <div class="fg"><label>Tag AI (pisah koma) *</label><input id="addAt" placeholder="// ChatGPT, Claude, DeepSeek..."/></div>
+      <div class="fg"><label>Kategori</label><input id="addCa" placeholder="// Roleplay, Coding, Realistic..."/></div>
+      <div id="addFOnly">
+        <div class="fg">
+          <label>Gambar Preview</label>
+          <div class="img-up">
+            <input type="file" id="addIF" accept="image/*" onchange="pvF(this)"/>
+            <div class="img-pv" id="addPv">// klik untuk upload gambar (JPG/PNG)</div>
+          </div>
+          <div style="margin-top:.5rem">
+            <input id="addIU" placeholder="// atau URL gambar: https://..." oninput="pvU(this.value)" style="width:100%;padding:.62rem .85rem;border:2px solid var(--brd2);background:var(--bg2);font-size:.83rem;color:var(--txt);outline:none"/>
+          </div>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Label</label>
+        <div class="chk-row">
+          <label class="chk"><input type="checkbox" id="addLn"/> [NEW] Baru</label>
+          <label class="chk"><input type="checkbox" id="addLh"/> [HOT] Populer</label>
+        </div>
+      </div>
+      <div class="fg"><label>Isi Prompt *</label><textarea id="addCo" rows="7" placeholder="// tempel teks prompt lengkap di sini..."></textarea></div>
+    </div>
+    <div class="err-bx" id="addErr" style="display:none"></div>
+    <div class="ok-bx" id="addOk">// SUKSES: prompt berhasil dibagikan ke semua orang!</div>
+    <div class="mact-row">
+      <button class="btn-g" onclick="cm('mAdd')">[ESC] Batal</button>
+      <button class="btn-p" id="addBtn" onclick="doAdd()">[SEND] Kirim</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL: DETAIL JAILBREAK
+     ============================================================ -->
+<div class="modal" id="mDet" onclick="if(event.target===this)cm('mDet')">
+  <div class="mbox">
+    <button class="mc" onclick="cm('mDet')">[X]</button>
+    <div class="m-hd" id="mDetHd"></div>
+    <div class="m-tabs">
+      <button class="mtb on" id="mtb1" onclick="swDet('p')">// Prompt</button>
+      <button class="mtb" id="mtb2" onclick="swDet('i')">// Info</button>
+    </div>
+    <div class="m-body">
+      <div id="tabP"><div class="ptw"><pre class="ptxt" id="detTxt"></pre></div></div>
+      <div id="tabI" style="display:none"><div class="m-info"><table id="detTbl"></table></div></div>
+    </div>
+    <div class="m-acts">
+      <button class="ma ma-cp" id="btnCp" onclick="doCp()">[CP] Salin</button>
+      <button class="ma ma-dl" onclick="doDl()">[DL] Unduh</button>
+      <button class="ma ma-sh" onclick="doSh()">[SH] Bagikan</button>
+      <button class="ma ma-fv" id="btnFv" onclick="doFv()">[*] Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL: DETAIL FOTO
+     ============================================================ -->
+<div class="modal" id="mFoto" onclick="if(event.target===this)cm('mFoto')">
+  <div class="mbox mbox-ft">
+    <button class="mc" onclick="cm('mFoto')">[X]</button>
+    <div class="fd-img" id="fdImg">// no image</div>
+    <div class="m-hd" id="mFotoHd"></div>
+    <div class="m-body"><div class="ptw"><pre class="ptxt" id="fotoTxt"></pre></div></div>
+    <div class="m-acts">
+      <button class="ma ma-cp" onclick="doCpFoto()">[CP] Salin</button>
+      <button class="ma ma-dl" onclick="doDlFoto()">[DL] Unduh</button>
+      <button class="ma ma-sh" onclick="doShFoto()">[SH] Bagikan</button>
+      <button class="ma ma-fv" id="fvFoto" onclick="doFvFoto()">[*] Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL: ADMIN LOGIN
+     ============================================================ -->
+<div class="modal" id="mAdL" onclick="if(event.target===this)cm('mAdL')">
+  <div class="mbox mbox-sm">
+    <button class="mc" onclick="cm('mAdL')">[X]</button>
+    <div style="text-align:center;padding:1.3rem 1.2rem .7rem">
+      <div style="font-family:var(--cond);font-size:3rem;font-weight:900;color:var(--p2);line-height:1">[ADMIN]</div>
+      <div style="font-family:var(--cond);font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-top:.4rem">Admin Panel</div>
+      <div style="font-family:var(--mono);font-size:.72rem;color:var(--txt2);margin-top:.3rem">// masukkan password untuk akses</div>
+    </div>
+    <div class="fw" style="padding:0 1.2rem .2rem">
+      <div class="fg">
+        <label>Password</label>
+        <input type="password" id="adPw" placeholder="// password..." onkeydown="if(event.key==='Enter')chkAd()"/>
+      </div>
+    </div>
+    <div class="err-bx" id="adErr" style="display:none;margin:.2rem 1.2rem .65rem">// ERROR: password salah</div>
+    <div class="mact-row">
+      <button class="btn-g" onclick="cm('mAdL')">[ESC] Batal</button>
+      <button class="btn-p" onclick="chkAd()">[OK] Masuk</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ADMIN PANEL
+     ============================================================ -->
+<div class="admin" id="adminPanel">
+  <div class="ad-hd">
+    <h2>[ADMIN] // Panel Kontrol</h2>
+    <div style="display:flex;gap:.4rem">
+      <button class="btn-sm" onclick="adTab('jb')">[ JB ]</button>
+      <button class="btn-sm" onclick="adTab('ft')">[ FOTO ]</button>
+      <button class="btn-sm" onclick="syncNow()">[ SYNC ]</button>
+      <button class="btn-sm r" onclick="closeAdmin()">[ CLOSE ]</button>
+    </div>
+  </div>
+  <div class="ad-body">
+    <div class="ad-tab on" id="adJb">
+      <div class="ad-sec">// Prompt Jailbreak // TOTAL: <span id="jbAdCnt">0</span></div>
+      <div id="jbAdList"></div>
+    </div>
+    <div class="ad-tab" id="adFt">
+      <div class="ad-sec">// Prompt Foto // TOTAL: <span id="ftAdCnt">0</span></div>
+      <div id="ftAdList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastT"></span></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
