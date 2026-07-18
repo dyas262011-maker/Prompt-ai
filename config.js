@@ -16,7 +16,7 @@ const CFG = {
   binId:     '6a5aec91f5f4af5e299f2f14',
 
   /* Audio intro */
-  introAudio: 'https://cdn-alip.clutch.web.id/api/u/mrm2bwaq.mp3',
+  introAudio: 'https://a.top4top.io/m_3850rlnmr1.m4a',
 
   aiTags: ['ChatGPT','Claude','Gemini','DeepSeek','Qwen','Grok','Midjourney','DALL-E','Stable Diffusion','Copilot']
 };
