@@ -22,23 +22,86 @@ const gv = id => ($( id)?.value || '').trim();
 const DB = {
   base: 'https://api.jsonbin.io/v3',
   get h() { return { 'Content-Type':'application/json', 'X-Master-Key':CFG.masterKey, 'X-Bin-Private':'false' }; },
-  async create() {
+
+  /* Cari bin berdasarkan NAMA — semua device dapat ID yang sama */
+  async findOrCreate() {
+    /* 1. Coba cari bin yang sudah ada via search metadata */
     try {
-      const r = await fetch(this.base+'/b', { method:'POST', headers:{...this.h,'X-Bin-Name':CFG.binName}, body:JSON.stringify({jb:[],ft:[]}) });
+      const r = await fetch(this.base+'/b?page=1&sortBy=createdAt&sortOrder=desc&limit=30', {
+        headers: { 'X-Master-Key': CFG.masterKey }
+      });
+      if (r.ok) {
+        const d = await r.json();
+        const bins = d.result || [];
+        /* Cari bin dengan nama yang cocok */
+        for (const b of bins) {
+          if (b.snippetMeta?.name === CFG.binName || b.record?.name === CFG.binName) {
+            BIN_ID = b.record?.id || b.id || b._id || '';
+            if (BIN_ID) {
+              localStorage.setItem('cp_bin_id', BIN_ID);
+              console.log('[DB] Found bin:', BIN_ID);
+              return true;
+            }
+          }
+        }
+        /* Juga coba ambil ID dari metadata langsung */
+        for (const b of bins) {
+          /* JSONBin v3 format berbeda-beda, coba semua kemungkinan */
+          const id = b.record?.id || b._id || b.id || (b.metadata && b.metadata.id) || '';
+          if (id) {
+            /* Verifikasi nama bin ini */
+            try {
+              const rm = await fetch(this.base+'/b/'+id+'/meta', { headers:{'X-Master-Key':CFG.masterKey} });
+              if (rm.ok) {
+                const dm = await rm.json();
+                const name = dm.metadata?.name || dm.record?.name || '';
+                if (name === CFG.binName) {
+                  BIN_ID = id;
+                  localStorage.setItem('cp_bin_id', BIN_ID);
+                  console.log('[DB] Found via meta:', BIN_ID);
+                  return true;
+                }
+              }
+            } catch(e) {}
+          }
+        }
+      }
+    } catch(e) { console.warn('[DB] Search error:', e); }
+
+    /* 2. Tidak ketemu — buat bin baru */
+    console.log('[DB] Creating new bin...');
+    try {
+      const r = await fetch(this.base+'/b', {
+        method: 'POST',
+        headers: { ...this.h, 'X-Bin-Name': CFG.binName },
+        body: JSON.stringify({ jb: [], ft: [], name: CFG.binName })
+      });
       const d = await r.json();
-      if (d.metadata?.id) { BIN_ID = d.metadata.id; localStorage.setItem('cp_bin_id', BIN_ID); return true; }
-    } catch(e) { console.error('[DB]', e); }
+      const newId = d.metadata?.id || d._id || '';
+      if (newId) {
+        BIN_ID = newId;
+        localStorage.setItem('cp_bin_id', BIN_ID);
+        console.log('[DB] Created bin:', BIN_ID);
+        return true;
+      }
+    } catch(e) { console.error('[DB] Create error:', e); }
     return false;
   },
+
   async read() {
     if (!BIN_ID) return null;
     try {
       const r = await fetch(this.base+'/b/'+BIN_ID+'/latest', { headers:{'X-Master-Key':CFG.masterKey} });
-      if (!r.ok) return null;
+      if (!r.ok) {
+        /* Bin ID mungkin salah — reset dan cari ulang */
+        if (r.status === 404) { BIN_ID = ''; localStorage.removeItem('cp_bin_id'); }
+        return null;
+      }
       const d = await r.json();
       return d.record || null;
     } catch(e) { return null; }
   },
+
   async write(data) {
     if (!BIN_ID) return false;
     try {
@@ -241,10 +304,13 @@ function applyTh(t) {
 /* ── DB INIT ── */
 async function initDB() {
   showSync('// CONNECTING...');
-  if (!BIN_ID) {
-    showSync('// CREATING DATABASE...');
-    const ok = await DB.create();
-    if (!ok) { hideSync(); toast('// OFFLINE: gagal konek DB'); loadCache(); return; }
+  /* Selalu cari bin via nama dulu agar semua device pakai bin yang sama */
+  const ok = await DB.findOrCreate();
+  if (!ok) {
+    hideSync();
+    toast('// OFFLINE: gagal konek DB');
+    loadCache();
+    return;
   }
   await syncData();
   startAutoSync();
