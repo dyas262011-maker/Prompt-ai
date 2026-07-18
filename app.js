@@ -112,104 +112,130 @@ const DB = {
 };
 
 /* ================================================================
-   AUDIO — 2 SISTEM TERPISAH
-   1. audioBg  : otomatis saat masuk, loop, URL dari CFG
-   2. audioBtn : diputar via tombol manual (sama URL)
+   AUDIO SYSTEM
+   - audioBg  : otomatis loop saat masuk (unlock via gesture)
+   - audioBtn : tombol manual di navbar
    ================================================================ */
 (function initAudio() {
-  const bg  = $('audioBg');
-  const btn = $('audioBtn');
-  if (!bg || !btn || !CFG.introAudio) return;
+  const bg = $('audioBg');
+  if (!bg || !CFG.introAudio) return;
 
-  bg.src  = CFG.introAudio;
-  btn.src = CFG.introAudio;
-  bg.loop    = true;
-  bg.volume  = 0;
-  btn.volume = 0.85;
-  bg.preload = btn.preload = 'auto';
+  /* Set source */
+  bg.src    = CFG.introAudio;
+  bg.loop   = true;
+  bg.volume = 0;
+  bg.preload = 'auto';
 
-  const SESSION_KEY = 'cp_bg_played';
+  /* Session key — reset tiap buka browser baru (bukan tab baru) */
+  const KEY = 'cp_aud';
 
-  /* ── UI update ── */
-  function setBgUI(playing) {
-    bgPlaying = playing;
+  /* ── Update UI bars ── */
+  function setUI(on) {
     const bars = $('aBarsNav');
     const ico  = $('audioIcoNav');
-    if (bars) bars.classList.toggle('stopped', !playing);
-    if (ico)  ico.textContent = playing ? '[ || ]' : '[ > ]';
+    if (bars) bars.classList.toggle('stopped', !on);
+    if (ico)  ico.textContent = on ? '[ || ]' : '[ > ]';
   }
 
-  /* ── Fade in bg audio ── */
-  function fadeBgIn(target) {
+  /* ── Fade volume naik ── */
+  function fadeIn() {
+    let v = 0;
     bg.volume = 0;
     const t = setInterval(() => {
-      bg.volume = Math.min(bg.volume + 0.03, target || 0.72);
-      if (bg.volume >= (target || 0.72)) clearInterval(t);
-    }, 80);
+      v = Math.min(v + 0.05, 0.75);
+      bg.volume = v;
+      if (v >= 0.75) clearInterval(t);
+    }, 60);
   }
 
-  /* ── Play bg audio (otomatis) ── */
-  function startBg() {
-    if (sessionStorage.getItem(SESSION_KEY)) return; /* sudah pernah di sesi ini */
-    bg.currentTime = 0;
-    bg.play().then(() => {
-      sessionStorage.setItem(SESSION_KEY, '1');
-      setBgUI(true);
-      fadeBgIn(0.72);
-    }).catch(() => { /* blocked - tunggu gesture */ });
+  /* ── Core play function ── */
+  function doPlay() {
+    const p = bg.play();
+    if (p !== undefined) {
+      p.then(() => {
+        sessionStorage.setItem(KEY, '1');
+        setUI(true);
+        fadeIn();
+      }).catch(() => {
+        /* Blocked — akan dicoba saat gesture */
+        setUI(false);
+      });
+    }
   }
 
-  /* ── Toggle bg dari navbar button ── */
-  window.toggleBgAudio = function() {
-    if (bgPlaying) {
+  /* ── Toggle dari tombol navbar ── */
+  window.toggleBgAudio = function () {
+    if (!bg.paused) {
       bg.pause();
-      setBgUI(false);
+      setUI(false);
     } else {
-      bg.currentTime = bgPlaying ? bg.currentTime : 0;
-      bg.volume = 0;
-      bg.play().then(() => {
-        sessionStorage.setItem(SESSION_KEY, '1');
-        setBgUI(true);
-        fadeBgIn(0.72);
-      }).catch(() => toast('// tap untuk aktifkan audio'));
-    }
-  };
-
-  bg.addEventListener('ended', () => setBgUI(false));
-
-  /* Coba autoplay segera */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(startBg, 800));
-  } else {
-    setTimeout(startBg, 800);
-  }
-
-  /* Unlock via gesture PERTAMA (capture phase) */
-  let gestureUnlocked = false;
-  function onGesture() {
-    if (gestureUnlocked) return;
-    gestureUnlocked = true;
-    if (!sessionStorage.getItem(SESSION_KEY)) {
       bg.currentTime = 0;
-      bg.play().then(() => {
-        sessionStorage.setItem(SESSION_KEY, '1');
-        setBgUI(true);
-        fadeBgIn(0.72);
-      }).catch(() => {});
+      bg.volume = 0;
+      const p = bg.play();
+      if (p !== undefined) {
+        p.then(() => { sessionStorage.setItem(KEY, '1'); setUI(true); fadeIn(); })
+         .catch(() => { toast('// Tap layar dulu untuk aktifkan audio'); });
+      }
     }
-    document.removeEventListener('touchstart', onGesture, true);
-    document.removeEventListener('mousedown',  onGesture, true);
-  }
-  document.addEventListener('touchstart', onGesture, { capture:true, passive:true, once:true });
-  document.addEventListener('mousedown',  onGesture, { capture:true, once:true });
-
-  /* ── AUDIO BTN: dipasang ke tombol yang USER tentukan ── */
-  /* btn audio di welcome/hero bisa dipanggil manual */
-  window.playBtnAudio = function() {
-    btn.currentTime = 0;
-    btn.volume = 0.85;
-    btn.play().catch(() => {});
   };
+
+  bg.addEventListener('ended', () => setUI(false));
+  bg.addEventListener('pause', () => { if (!bg.ended) setUI(false); });
+
+  /* ── STRATEGI UNLOCK AUDIO ──
+     Browser mobile WAJIB ada user gesture sebelum bisa play.
+     Kita pasang listener di CAPTURE PHASE (sebelum event sampai ke elemen lain)
+     sehingga gesture PERTAMA apapun (tap, klik, scroll) langsung unlock audio.
+  ── */
+  let unlocked = false;
+
+  function unlock(e) {
+    if (unlocked) return;
+    unlocked = true;
+
+    /* Jangan play ulang jika sudah pernah di session ini */
+    if (sessionStorage.getItem(KEY)) return;
+
+    bg.currentTime = 0;
+    bg.volume = 0;
+    const p = bg.play();
+    if (p !== undefined) {
+      p.then(() => {
+        sessionStorage.setItem(KEY, '1');
+        setUI(true);
+        fadeIn();
+      }).catch(() => {
+        unlocked = false; /* Retry jika masih gagal */
+      });
+    }
+  }
+
+  /* Pasang di semua jenis interaksi — capture:true penting! */
+  ['touchstart','touchend','mousedown','click','keydown','scroll'].forEach(ev => {
+    document.addEventListener(ev, unlock, { capture: true, passive: true, once: true });
+  });
+
+  /* Coba autoplay segera (berhasil di desktop, gagal di mobile — fallback ke gesture) */
+  function tryImmediate() {
+    if (sessionStorage.getItem(KEY)) return;
+    bg.currentTime = 0;
+    bg.volume = 0;
+    bg.play().then(() => {
+      sessionStorage.setItem(KEY, '1');
+      setUI(true);
+      fadeIn();
+      unlocked = true;
+    }).catch(() => {
+      /* Mobile blocked — tunggu gesture di atas */
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryImmediate, 500));
+  } else {
+    setTimeout(tryImmediate, 500);
+  }
+
 })();
 
 /* ── HERO PARTICLES ── */
