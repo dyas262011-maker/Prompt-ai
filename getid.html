@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Get Bin ID</title>
+<style>
+body{font-family:monospace;background:#0a0b14;color:#e8e9f5;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:1rem;text-align:center;}
+.box{max-width:400px;width:100%;}
+h2{color:#a78bfa;font-size:1.2rem;margin-bottom:1rem;}
+.id{font-size:1.1rem;color:#06b6d4;padding:1rem;background:#0e0f1c;border:3px solid #06b6d4;margin:1rem 0;word-break:break-all;min-height:3rem;display:flex;align-items:center;justify-content:center;}
+.btn{width:100%;padding:1rem;background:#7c3aed;color:#fff;border:3px solid #fff;font-family:monospace;font-size:1rem;cursor:pointer;margin-bottom:.5rem;box-shadow:4px 4px 0 #fff;}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #fff;}
+.note{font-size:.75rem;color:#454860;margin-top:1rem;line-height:1.8;}
+.ok{color:#059669;margin:.5rem 0;}
+.err{color:#ef4444;margin:.5rem 0;}
+</style>
+</head>
+<body>
+<div class="box">
+  <h2>// GET BIN ID</h2>
+  <div class="id" id="idBox">// tap tombol di bawah</div>
+  <button class="btn" onclick="getId()">[ TAMPILKAN BIN ID ]</button>
+  <button class="btn" onclick="copyIt()">[ COPY BIN ID ]</button>
+  <div id="msg"></div>
+  <div class="note">
+    Upload file ini ke Vercel bersama file lainnya,<br/>
+    lalu buka ai-prompt.my.id/getid.html
+  </div>
+</div>
+<script>
+let id = '';
+function getId() {
+  id = localStorage.getItem('cp_bin_id') || '';
+  const box = document.getElementById('idBox');
+  const msg = document.getElementById('msg');
+  if (id) {
+    box.textContent = id;
+    box.style.color = '#06b6d4';
+    msg.innerHTML = '<div class="ok">// Ditemukan! Copy ID di atas.</div>';
+  } else {
+    box.textContent = '// TIDAK ADA — buka dulu web utama';
+    box.style.color = '#ef4444';
+    msg.innerHTML = '<div class="err">// Buka ai-prompt.my.id dulu, tunggu loading selesai, lalu kembali ke sini.</div>';
+  }
+}
+function copyIt() {
+  if (!id) { getId(); return; }
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(id).then(() => {
+      document.getElementById('msg').innerHTML = '<div class="ok">// TERSALIN! Kirim ke Claude.</div>';
+    });
+  } else {
+    const t = document.createElement('textarea');
+    t.value = id; document.body.appendChild(t); t.select();
+    document.execCommand('copy'); document.body.removeChild(t);
+    document.getElementById('msg').innerHTML = '<div class="ok">// TERSALIN!</div>';
+  }
+}
+/* Auto tampil saat load */
+window.onload = getId;
+</script>
+</body>
+</html>
