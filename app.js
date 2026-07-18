@@ -11,7 +11,7 @@ let jbFil = 'semua', ftFil = 'semua';
 let jbSM = 'baru', ftSM = 'baru';
 let jbQ = '', ftQ = '';
 let addType = 'jb';
-let BIN_ID = localStorage.getItem('cp_bin_id') || '';
+let BIN_ID = '6a5aec91f5f4af5e299f2f14'; /* HARDCODED — semua device pakai bin yang sama */
 let syncTimer = null;
 let bgPlaying = false;
 
@@ -303,15 +303,8 @@ function applyTh(t) {
 
 /* ── DB INIT ── */
 async function initDB() {
+  /* BIN_ID sudah hardcoded — langsung sync */
   showSync('// CONNECTING...');
-  /* Selalu cari bin via nama dulu agar semua device pakai bin yang sama */
-  const ok = await DB.findOrCreate();
-  if (!ok) {
-    hideSync();
-    toast('// OFFLINE: gagal konek DB');
-    loadCache();
-    return;
-  }
   await syncData();
   startAutoSync();
 }
