@@ -103,11 +103,27 @@ const DB = {
   },
 
   async write(data) {
-    if (!BIN_ID) return false;
+    if (!BIN_ID) { console.error('[DB] No BIN_ID'); return false; }
     try {
-      const r = await fetch(this.base+'/b/'+BIN_ID, { method:'PUT', headers:this.h, body:JSON.stringify(data) });
-      return r.ok;
-    } catch(e) { return false; }
+      const body = JSON.stringify(data);
+      const kb   = (body.length / 1024).toFixed(1);
+      console.log('[DB] Writing', kb, 'KB to bin', BIN_ID);
+      const r = await fetch(this.base + '/b/' + BIN_ID, {
+        method: 'PUT',
+        headers: this.h,
+        body: body
+      });
+      if (!r.ok) {
+        const err = await r.text();
+        console.error('[DB] Write failed:', r.status, err);
+        return false;
+      }
+      console.log('[DB] Write OK');
+      return true;
+    } catch(e) {
+      console.error('[DB] Write error:', e);
+      return false;
+    }
   }
 };
 
@@ -594,21 +610,78 @@ async function doAdd() {
     await _saveAdd(base,'jb');
   }
 }
-async function _saveAdd(p,tp) {
-  if(tp==='jb')JB.unshift(p);else FT.unshift(p);
-  const ok=await DB.write({jb:JB,ft:FT});
-  const btn=$('addBtn');
-  if(ok){
-    saveCache();buildPills(tp);if(tp==='jb')renderJb();else renderFt();renderHome();updStats();rndrAdLists();
-    const okEl=$('addOk');if(okEl)okEl.style.display='block';
-    toast('// [OK] "'+p.title+'" dibagikan ke semua orang!',4000);
-    setTimeout(()=>cm('mAdd'),1800);
-  } else {
-    if(tp==='jb')JB.shift();else FT.shift();
-    const er=$('addErr');
-    if(er){er.textContent='// ERROR: gagal menyimpan. coba lagi.';er.style.display='block';}
+/* Bersihkan data sebelum simpan — hapus field kosong agar ukuran kecil */
+function trimPrompt(p) {
+  const t = {
+    id: p.id,
+    title: p.title,
+    author: p.author || '',
+    content: p.content || '',
+    aiTags: p.aiTags || [],
+    createdAt: p.createdAt,
+    views: 0
+  };
+  if (p.desc)     t.desc     = p.desc;
+  if (p.category) t.category = p.category;
+  if (p.imgUrl)   t.imgUrl   = p.imgUrl;
+  if (p.labels && (p.labels.baru || p.labels.populer)) t.labels = p.labels;
+  return t;
+}
+
+/* Cek ukuran payload dalam KB */
+function payloadKB(data) {
+  return (JSON.stringify(data).length / 1024).toFixed(1);
+}
+
+async function _saveAdd(p, tp) {
+  /* Trim prompt baru */
+  const trimmed = trimPrompt(p);
+
+  /* Trim semua data lama juga */
+  const jbClean = JB.map(trimPrompt);
+  const ftClean = FT.map(trimPrompt);
+
+  if (tp === 'jb') jbClean.unshift(trimmed);
+  else             ftClean.unshift(trimmed);
+
+  /* Cek ukuran */
+  const payload = { jb: jbClean, ft: ftClean };
+  const kb = payloadKB(payload);
+  console.log('[DB] Payload size:', kb, 'KB');
+
+  if (parseFloat(kb) > 95) {
+    /* Terlalu besar — potong data lama */
+    if (tp === 'jb') {
+      while (payloadKB({ jb: jbClean, ft: ftClean }) > 90 && jbClean.length > 1) jbClean.pop();
+    } else {
+      while (payloadKB({ jb: jbClean, ft: ftClean }) > 90 && ftClean.length > 1) ftClean.pop();
+    }
+    toast('// INFO: beberapa prompt lama dihapus untuk hemat ruang', 4000);
   }
-  if(btn){btn.disabled=false;btn.textContent='[SEND] Kirim';}
+
+  const ok = await DB.write({ jb: jbClean, ft: ftClean });
+  const btn = $('addBtn');
+
+  if (ok) {
+    /* Update state lokal */
+    if (tp === 'jb') JB = jbClean; else FT = ftClean;
+    saveCache();
+    buildPills(tp);
+    if (tp === 'jb') renderJb(); else renderFt();
+    renderHome(); updStats(); rndrAdLists();
+    const okEl = $('addOk'); if (okEl) okEl.style.display = 'block';
+    toast('// [OK] "' + p.title + '" dibagikan ke semua orang!', 4000);
+    setTimeout(() => cm('mAdd'), 1800);
+  } else {
+    const er = $('addErr');
+    const kb2 = payloadKB({ jb: jbClean, ft: ftClean });
+    if (er) {
+      er.textContent = '// ERROR: gagal menyimpan. Ukuran: ' + kb2 + 'KB (max 95KB). Coba persingkat isi prompt.';
+      er.style.display = 'block';
+      er.classList.remove('shake'); void er.offsetWidth; er.classList.add('shake');
+    }
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '[SEND] Kirim'; }
 }
 
 /* IMAGE PREVIEW (URL only) */
