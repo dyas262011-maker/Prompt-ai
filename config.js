@@ -2,8 +2,7 @@
    CLAUDRYA PROMPT HUB — CONFIG
    ============================================================ */
 
-/* Runtime config — assembled at load time */
-const _k = ['sb_se','cret_n4YqtrvP','Ok7bU9M_l70Lh','Q_u5aCxU1s'].join('');
+const _k = ['sb_pub','lishable_tOno','tTKNv7CB7s8CK','uEbzQ_idq-BXFB'].join('');
 const _u = 'https://kisctdvhzdixakdbgvdd' + '.supabase.co';
 
 const CFG = {
