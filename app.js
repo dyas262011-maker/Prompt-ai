@@ -38,12 +38,15 @@ const SB = {
   /* Baca semua data */
   async readAll() {
     try {
+      console.log('[SB] readAll — URL:', this.url, '| Key:', this.key ? this.key.slice(0,20)+'...' : 'EMPTY!');
       const [rJb, rFt] = await Promise.all([
         fetch(this.url + '/rest/v1/jailbreak?select=*&order=created_at.desc&limit=200', { headers: this.hSelect }),
         fetch(this.url + '/rest/v1/foto?select=*&order=created_at.desc&limit=200',      { headers: this.hSelect })
       ]);
       if (!rJb.ok || !rFt.ok) {
-        console.error('[SB] Read error:', rJb.status, rFt.status);
+        const e1 = await rJb.text(); const e2 = await rFt.text();
+        console.error('[SB] Read error:', rJb.status, e1, rFt.status, e2);
+        toast('// DB Read Error ' + rJb.status + ': ' + e1.slice(0,60), 5000);
         return null;
       }
       const jb = await rJb.json();
@@ -58,19 +61,26 @@ const SB = {
   /* Insert satu prompt */
   async insert(table, p) {
     try {
+      const body = localToSb(p);
+      console.log('[SB] Inserting to', table, body);
+      console.log('[SB] URL:', this.url + '/rest/v1/' + table);
+      console.log('[SB] Key:', this.key ? this.key.slice(0,20)+'...' : 'EMPTY!');
       const r = await fetch(this.url + '/rest/v1/' + table, {
         method:  'POST',
         headers: { ...this.h, 'Prefer': 'return=representation' },
-        body:    JSON.stringify(localToSb(p))
+        body:    JSON.stringify(body)
       });
+      const txt = await r.text();
       if (!r.ok) {
-        const err = await r.text();
-        console.error('[SB] Insert error:', r.status, err);
+        console.error('[SB] Insert failed:', r.status, txt);
+        toast('// DB Error ' + r.status + ': ' + txt.slice(0,80), 6000);
         return false;
       }
+      console.log('[SB] Insert OK:', txt.slice(0,100));
       return true;
     } catch(e) {
-      console.error('[SB] insert error:', e);
+      console.error('[SB] insert exception:', e);
+      toast('// Network error: ' + e.message, 5000);
       return false;
     }
   },
