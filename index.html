@@ -384,5 +384,99 @@
 
 <script src="config.js"></script>
 <script src="app.js"></script>
+
+<!-- ============================================================
+     AUDIO TERMINAL — Music Player
+     ============================================================ -->
+<div class="at-wrap" id="atWrap">
+  <!-- Toggle button -->
+  <button class="at-toggle" id="atToggle" onclick="atToggleOpen()">
+    <div class="at-toggle-bars" id="atTBars">
+      <div class="at-tb"></div><div class="at-tb"></div>
+      <div class="at-tb"></div><div class="at-tb"></div>
+    </div>
+    <span class="at-toggle-txt" id="atToggleTxt">AUDIO TERMINAL</span>
+  </button>
+
+  <!-- Player panel -->
+  <div class="at-panel" id="atPanel">
+    <div class="at-hd">
+      <div class="at-hd-l">
+        <div class="at-sys">SYSTEM://AUDIO_TERMINAL</div>
+        <div class="at-title">AUDIO TERMINAL <span class="at-ver">V1.0</span></div>
+      </div>
+      <div class="at-hd-r">
+        <button class="at-close" onclick="atToggleOpen()">[X]</button>
+      </div>
+    </div>
+
+    <!-- Now playing -->
+    <div class="at-now">
+      <div class="at-cover" id="atCover">
+        <div class="at-cover-art" id="atCoverArt">
+          <div class="at-cover-bars">
+            <div class="at-cb"></div><div class="at-cb"></div>
+            <div class="at-cb"></div><div class="at-cb"></div>
+            <div class="at-cb"></div>
+          </div>
+        </div>
+      </div>
+      <div class="at-info">
+        <div class="at-track-num" id="atNum">// TRACK 01</div>
+        <div class="at-track-title" id="atTrackTitle">// SELECT TRACK</div>
+        <div class="at-track-artist" id="atTrackArtist">CLAUDRYA PROMPT</div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="at-progress-wrap" onclick="atSeek(event)">
+      <div class="at-progress-bg">
+        <div class="at-progress-fill" id="atProgress"></div>
+        <div class="at-progress-dot" id="atDot"></div>
+      </div>
+    </div>
+    <div class="at-time-row">
+      <span class="at-time" id="atCurTime">0:00</span>
+      <span class="at-time" id="atDurTime">0:00</span>
+    </div>
+
+    <!-- Controls -->
+    <div class="at-controls">
+      <button class="at-btn" onclick="atPrev()" title="Prev">[|&lt;]</button>
+      <button class="at-btn at-btn-main" id="atPlayBtn" onclick="atTogglePlay()">[&#9654;]</button>
+      <button class="at-btn" onclick="atNext()" title="Next">[&gt;|]</button>
+      <button class="at-btn at-btn-sm" id="atLoopBtn" onclick="atToggleLoop()" title="Loop">[LP]</button>
+      <button class="at-btn at-btn-sm" id="atShufBtn" onclick="atToggleShuf()" title="Shuffle">[SH]</button>
+    </div>
+
+    <!-- Volume -->
+    <div class="at-vol-row">
+      <span class="at-vol-lbl">[VOL]</span>
+      <input type="range" class="at-vol" id="atVol" min="0" max="100" value="75" oninput="atSetVol(this.value)"/>
+      <span class="at-vol-val" id="atVolVal">75</span>
+    </div>
+
+    <!-- Playlist -->
+    <div class="at-playlist-hd">
+      <span>// PLAYLIST (<span id="atPlCount">0</span> TRACKS)</span>
+      <button class="at-btn at-btn-sm" onclick="atOpenAddTrack()" title="Tambah lagu">[+]</button>
+    </div>
+    <div class="at-playlist" id="atPlaylist"></div>
+
+    <!-- Add track form -->
+    <div class="at-add-form" id="atAddForm" style="display:none">
+      <div class="at-add-hd">// TAMBAH TRACK</div>
+      <input class="at-input" id="atInTitle" placeholder="// Judul lagu..."/>
+      <input class="at-input" id="atInArtist" placeholder="// Nama artis..."/>
+      <input class="at-input" id="atInUrl" placeholder="// URL audio (mp3/m4a)..."/>
+      <input class="at-input" id="atInCover" placeholder="// URL cover image (opsional)..."/>
+      <div class="at-add-btns">
+        <button class="at-btn" onclick="atCloseAddTrack()">[ESC]</button>
+        <button class="at-btn at-btn-main" onclick="atAddTrack()">[+] TAMBAH</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
