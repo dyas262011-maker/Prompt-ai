@@ -641,3 +641,244 @@ function rndrAdLists(){
 /* ── TOAST ── */
 let _tt;
 function toast(msg,dur=3000){const el=$('toast'),tx=$('toastT');if(!el||!tx)return;tx.innerHTML=msg;el.classList.add('on');clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('on'),dur);}
+
+
+/* ================================================================
+   AUDIO TERMINAL — MUSIC PLAYER
+   ================================================================ */
+(function() {
+  const AT = {
+    audio:    new Audio(),
+    tracks:   JSON.parse(localStorage.getItem('cp_tracks') || '[]'),
+    cur:      parseInt(localStorage.getItem('cp_track_cur') || '0'),
+    playing:  false,
+    loop:     localStorage.getItem('cp_loop') === '1',
+    shuffle:  localStorage.getItem('cp_shuf') === '1',
+    open:     false,
+
+    /* Default tracks — bisa dihapus user */
+    defaults: [
+      {
+        title:  'INTRO AUDIO',
+        artist: 'Claudrya',
+        url:    'https://a.top4top.io/m_3850rlnmr1.m4a',
+        cover:  ''
+      }
+    ]
+  };
+
+  /* Init tracks dari localStorage atau default */
+  function initTracks() {
+    if (!AT.tracks.length) {
+      AT.tracks = [...AT.defaults];
+      saveTracks();
+    }
+    if (AT.cur >= AT.tracks.length) AT.cur = 0;
+  }
+
+  function saveTracks() {
+    localStorage.setItem('cp_tracks', JSON.stringify(AT.tracks));
+  }
+
+  /* ── UI helpers ── */
+  const $ = id => document.getElementById(id);
+
+  function fmtTime(s) {
+    if (isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  function updateTrackUI() {
+    const t = AT.tracks[AT.cur];
+    if (!t) return;
+    const num = String(AT.cur + 1).padStart(2, '0');
+    const numEl = $('atNum'); if (numEl) numEl.textContent = '// TRACK ' + num;
+    const titleEl = $('atTrackTitle'); if (titleEl) titleEl.textContent = t.title.toUpperCase();
+    const artistEl = $('atTrackArtist'); if (artistEl) artistEl.textContent = t.artist.toUpperCase();
+    /* Cover */
+    const coverEl = $('atCoverArt');
+    if (coverEl && t.cover) {
+      coverEl.innerHTML = '<img class="at-cover-img" src="' + t.cover + '" onerror="this.parentElement.innerHTML='<div class=at-cover-bars><div class=at-cb></div><div class=at-cb></div><div class=at-cb></div><div class=at-cb></div><div class=at-cb></div></div>'"/>';
+    } else if (coverEl) {
+      coverEl.innerHTML = '<div class="at-cover-bars"><div class="at-cb"></div><div class="at-cb"></div><div class="at-cb"></div><div class="at-cb"></div><div class="at-cb"></div></div>';
+    }
+    renderPlaylist();
+  }
+
+  function setPlayUI(on) {
+    AT.playing = on;
+    const btn = $('atPlayBtn'); if (btn) btn.innerHTML = on ? '[&#9646;&#9646;]' : '[&#9654;]';
+    const art = $('atCoverArt'); if (art) art.classList.toggle('paused', !on);
+    const bars = $('atTBars'); if (bars) bars.classList.toggle('stopped', !on);
+  }
+
+  /* ── Load & Play ── */
+  function loadTrack(idx, autoPlay) {
+    if (!AT.tracks.length) return;
+    AT.cur = ((idx % AT.tracks.length) + AT.tracks.length) % AT.tracks.length;
+    localStorage.setItem('cp_track_cur', AT.cur);
+    const t = AT.tracks[AT.cur];
+    AT.audio.src = t.url;
+    AT.audio.load();
+    updateTrackUI();
+    if (autoPlay) doPlay();
+  }
+
+  function doPlay() {
+    AT.audio.play().then(() => setPlayUI(true)).catch(e => {
+      console.log('[AT] play error:', e);
+    });
+  }
+
+  function doPause() {
+    AT.audio.pause();
+    setPlayUI(false);
+  }
+
+  /* ── Controls ── */
+  window.atTogglePlay = function() {
+    if (!AT.tracks.length) return;
+    if (AT.audio.paused) doPlay(); else doPause();
+  };
+
+  window.atNext = function() {
+    if (!AT.tracks.length) return;
+    let next;
+    if (AT.shuffle) {
+      next = Math.floor(Math.random() * AT.tracks.length);
+    } else {
+      next = (AT.cur + 1) % AT.tracks.length;
+    }
+    loadTrack(next, true);
+  };
+
+  window.atPrev = function() {
+    if (!AT.tracks.length) return;
+    if (AT.audio.currentTime > 3) {
+      AT.audio.currentTime = 0; return;
+    }
+    loadTrack(AT.cur - 1, true);
+  };
+
+  window.atToggleLoop = function() {
+    AT.loop = !AT.loop;
+    AT.audio.loop = AT.loop;
+    localStorage.setItem('cp_loop', AT.loop ? '1' : '0');
+    const btn = $('atLoopBtn'); if (btn) btn.classList.toggle('active', AT.loop);
+  };
+
+  window.atToggleShuf = function() {
+    AT.shuffle = !AT.shuffle;
+    localStorage.setItem('cp_shuf', AT.shuffle ? '1' : '0');
+    const btn = $('atShufBtn'); if (btn) btn.classList.toggle('active', AT.shuffle);
+  };
+
+  window.atSetVol = function(v) {
+    AT.audio.volume = v / 100;
+    const val = $('atVolVal'); if (val) val.textContent = v;
+  };
+
+  window.atSeek = function(e) {
+    const bar = e.currentTarget.querySelector('.at-progress-bg');
+    if (!bar || !AT.audio.duration) return;
+    const rect = bar.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    AT.audio.currentTime = ratio * AT.audio.duration;
+  };
+
+  /* ── Toggle panel ── */
+  window.atToggleOpen = function() {
+    AT.open = !AT.open;
+    const panel = $('atPanel'); if (panel) panel.classList.toggle('open', AT.open);
+  };
+
+  /* ── Add track ── */
+  window.atOpenAddTrack = function() {
+    const f = $('atAddForm'); if (f) { f.style.display = 'block'; $('atInUrl')?.focus(); }
+  };
+  window.atCloseAddTrack = function() {
+    const f = $('atAddForm'); if (f) f.style.display = 'none';
+    ['atInTitle','atInArtist','atInUrl','atInCover'].forEach(id => { const e=$( id); if(e)e.value=''; });
+  };
+  window.atAddTrack = function() {
+    const url    = ($('atInUrl')?.value || '').trim();
+    const title  = ($('atInTitle')?.value || '').trim() || 'Untitled';
+    const artist = ($('atInArtist')?.value || '').trim() || 'Unknown';
+    const cover  = ($('atInCover')?.value || '').trim();
+    if (!url) { alert('// URL audio wajib diisi!'); return; }
+    AT.tracks.push({ title, artist, url, cover });
+    saveTracks();
+    renderPlaylist();
+    const cnt = $('atPlCount'); if (cnt) cnt.textContent = AT.tracks.length;
+    atCloseAddTrack();
+  };
+
+  window.atDelTrack = function(idx) {
+    if (!confirm('// Hapus track ini?')) return;
+    AT.tracks.splice(idx, 1);
+    saveTracks();
+    if (AT.cur >= AT.tracks.length) AT.cur = Math.max(0, AT.tracks.length - 1);
+    loadTrack(AT.cur, false);
+  };
+
+  window.atPlayIdx = function(idx) {
+    loadTrack(idx, true);
+    /* Buka panel kalau belum */
+    if (!AT.open) atToggleOpen();
+  };
+
+  /* ── Render playlist ── */
+  function renderPlaylist() {
+    const list = $('atPlaylist'); if (!list) return;
+    const cnt  = $('atPlCount'); if (cnt) cnt.textContent = AT.tracks.length;
+    if (!AT.tracks.length) {
+      list.innerHTML = '<div style="padding:.8rem 1rem;font-family:var(--mono);font-size:.72rem;color:var(--txt3)">// PLAYLIST KOSONG — tambah track dulu</div>';
+      return;
+    }
+    list.innerHTML = AT.tracks.map((t, i) =>
+      '<div class="at-track-item' + (i === AT.cur ? ' playing' : '') + '" onclick="atPlayIdx(' + i + ')">' +
+        (i === AT.cur && AT.playing ? '<div class="at-ti-bars"><div class="at-ti-bar"></div><div class="at-ti-bar"></div><div class="at-ti-bar"></div></div>' : '<div class="at-ti-num">' + String(i+1).padStart(2,'0') + '</div>') +
+        '<div class="at-ti-info">' +
+          '<div class="at-ti-title">' + t.title + '</div>' +
+          '<div class="at-ti-artist">' + t.artist + '</div>' +
+        '</div>' +
+        '<button class="at-ti-del" onclick="event.stopPropagation();atDelTrack(' + i + ')">X</button>' +
+      '</div>'
+    ).join('');
+  }
+
+  /* ── Audio events ── */
+  AT.audio.addEventListener('timeupdate', () => {
+    if (!AT.audio.duration) return;
+    const pct = (AT.audio.currentTime / AT.audio.duration) * 100;
+    const fill = $('atProgress'); if (fill) fill.style.width = pct + '%';
+    const cur  = $('atCurTime'); if (cur) cur.textContent = fmtTime(AT.audio.currentTime);
+    const dur  = $('atDurTime'); if (dur) dur.textContent = fmtTime(AT.audio.duration);
+  });
+
+  AT.audio.addEventListener('ended', () => {
+    if (AT.loop) { AT.audio.currentTime = 0; doPlay(); return; }
+    atNext();
+  });
+
+  AT.audio.addEventListener('play',  () => setPlayUI(true));
+  AT.audio.addEventListener('pause', () => setPlayUI(false));
+  AT.audio.addEventListener('error', () => { setPlayUI(false); });
+
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', function() {
+    initTracks();
+    AT.audio.volume = 0.75;
+    AT.audio.loop   = AT.loop;
+
+    /* Set initial button states */
+    const loopBtn = $('atLoopBtn'); if (loopBtn) loopBtn.classList.toggle('active', AT.loop);
+    const shufBtn = $('atShufBtn'); if (shufBtn) shufBtn.classList.toggle('active', AT.shuffle);
+
+    loadTrack(AT.cur, false);
+    updateTrackUI();
+    renderPlaylist();
+  });
+})();
