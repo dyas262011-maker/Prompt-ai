@@ -14,13 +14,7 @@
 <!-- AUDIO -->
 <audio id="audioBg" preload="auto"></audio>
 
-<!-- ============================================================
-     APP LANGSUNG (tidak ada welcome screen)
-     ============================================================ -->
 <div id="app">
-
-<!-- SYNC BAR -->
-<div class="sync-bar" id="syncBar">// CONNECTING...</div>
 
 <!-- NAV -->
 <nav class="nav" id="mainNav">
@@ -35,10 +29,9 @@
       <button class="ntab" onclick="gp('foto')">Foto</button>
     </div>
     <div class="nav-r">
-      <!-- Audio toggle button -->
       <button class="nbtn audio-nbtn" id="audioBtnNav" onclick="toggleBgAudio()" title="Toggle Audio">
-        <span class="audio-ico" id="audioIcoNav">[&#9654;]</span>
-        <div class="a-bars" id="aBarsNav">
+        <span class="audio-ico" id="audioIcoNav">[ > ]</span>
+        <div class="a-bars stopped" id="aBarsNav">
           <div class="a-bar"></div><div class="a-bar"></div>
           <div class="a-bar"></div><div class="a-bar"></div>
         </div>
@@ -76,9 +69,11 @@
   </div>
 </div>
 
-<!-- ======= HOME ======= -->
+<!-- SYNC BAR -->
+<div class="sync-bar" id="syncBar">// CONNECTING...</div>
+
+<!-- HOME -->
 <div class="page on" id="pgHome">
-  <!-- HERO dengan blur reveal animasi -->
   <div class="h-hero" id="heroSection">
     <div class="h-hero-grid"></div>
     <div class="h-hero-bar"></div>
@@ -87,23 +82,16 @@
     <div class="h-scan-wrap"><div class="h-scan-line"></div></div>
     <div class="h-in">
       <div class="h-eyebrow reveal-down" id="hEyebrow">[ PLATFORM BERBAGI PROMPT AI ]</div>
-      <h1 class="h-title reveal-up" id="hTitle" data-text="CLAUDRYA PROMPT">
-        CLAUDRYA <span>PROMPT</span>
-      </h1>
-      <p class="h-sub reveal-up" id="hSub" style="animation-delay:.15s">
-        // Temukan dan bagikan prompt AI terbaik &mdash; siapa saja bisa berkontribusi
-      </p>
+      <h1 class="h-title reveal-up" id="hTitle" data-text="CLAUDRYA PROMPT">CLAUDRYA <span>PROMPT</span></h1>
+      <p class="h-sub reveal-up" id="hSub" style="animation-delay:.15s">// Temukan dan bagikan prompt AI terbaik &mdash; siapa saja bisa berkontribusi</p>
       <div class="h-stats reveal-up" style="animation-delay:.25s">
         <div class="hst"><strong id="cntJb">0</strong><span>Jailbreak</span></div>
         <div class="hst"><strong id="cntFt">0</strong><span>Foto</span></div>
         <div class="hst"><strong id="cntFv">0</strong><span>Favorit</span></div>
       </div>
     </div>
-    <!-- Floating particles -->
     <div class="h-particles" id="hParticles"></div>
   </div>
-
-  <!-- LANGSUNG PROMPT TERBARU -->
   <div class="sec" style="padding-top:2rem">
     <div class="sec-hd">
       <div>
@@ -116,7 +104,7 @@
   </div>
 </div>
 
-<!-- ======= JAILBREAK ======= -->
+<!-- JAILBREAK -->
 <div class="page" id="pgJb">
   <div class="ph">
     <div class="ph-bar"></div>
@@ -129,7 +117,6 @@
         <button class="ph-add" onclick="openAdd('jb')">[+] Tambah Prompt</button>
       </div>
     </div>
-    <!-- Mini card kategori di page header -->
     <div class="ph-mini-cards">
       <div class="ph-mc" onclick="openAdd('jb')">
         <div class="ph-mc-num">01</div>
@@ -147,9 +134,7 @@
   </div>
   <div class="pbody">
     <div class="f-row">
-      <div class="f-pills" id="jbPills">
-        <button class="fpill on" onclick="fJb('semua',this)">ALL <span class="fc" id="jbAllN">0</span></button>
-      </div>
+      <div class="f-pills" id="jbPills"><button class="fpill on" onclick="fJb('semua',this)">ALL <span class="fc" id="jbAllN">0</span></button></div>
       <select class="srt-sel" onchange="sJb(this.value)">
         <option value="baru">// Terbaru</option>
         <option value="pop">// Terpopuler</option>
@@ -168,7 +153,7 @@
   </div>
 </div>
 
-<!-- ======= FOTO ======= -->
+<!-- FOTO -->
 <div class="page" id="pgFoto">
   <div class="ph">
     <div class="ph-bar" style="background:var(--acc)"></div>
@@ -198,9 +183,7 @@
   </div>
   <div class="pbody">
     <div class="f-row">
-      <div class="f-pills" id="ftPills">
-        <button class="fpill on" onclick="fFt('semua',this)">ALL <span class="fc" id="ftAllN">0</span></button>
-      </div>
+      <div class="f-pills" id="ftPills"><button class="fpill on" onclick="fFt('semua',this)">ALL <span class="fc" id="ftAllN">0</span></button></div>
       <select class="srt-sel" onchange="sFt(this.value)">
         <option value="baru">// Terbaru</option>
         <option value="pop">// Terpopuler</option>
@@ -219,7 +202,7 @@
   </div>
 </div>
 
-<!-- ======= FAVORIT ======= -->
+<!-- FAVORIT -->
 <div class="page" id="pgFav">
   <div class="ph">
     <div class="ph-bar" style="background:var(--gold)"></div>
@@ -239,7 +222,7 @@
   </div>
 </div>
 
-<!-- ======= SEARCH ======= -->
+<!-- SEARCH -->
 <div class="page" id="pgSearch">
   <div class="pbody" style="padding-top:1.2rem">
     <div class="rcnt" id="srInfo" style="margin-bottom:.9rem">// ketik untuk mencari...</div>
@@ -253,9 +236,7 @@
 
 </div><!-- /app -->
 
-<!-- ============================================================
-     MODAL: TAMBAH PROMPT
-     ============================================================ -->
+<!-- MODAL: TAMBAH PROMPT -->
 <div class="modal" id="mAdd" onclick="if(event.target===this)cm('mAdd')">
   <div class="mbox">
     <button class="mc" onclick="cm('mAdd')">[X]</button>
