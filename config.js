@@ -17,7 +17,7 @@ const CFG = {
   adminPass:    'kiyra2024',   /* <-- ganti password admin di sini */
   adminTrigger: 5,
 
-  introAudio: 'https://c.top4top.io/m_3859rijrb1.mp3',  /* <-- ganti URL audio di sini */
+  introAudio: 'https://a.top4top.io/m_3859eto8r1.mp3',  /* <-- ganti URL audio di sini */
 
   aiTags: ['ChatGPT','Claude','Gemini','DeepSeek','Qwen','Grok','Midjourney','DALL-E','Stable Diffusion','Copilot'],
 
