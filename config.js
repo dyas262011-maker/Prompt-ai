@@ -10,7 +10,7 @@ const CFG = (function() {
 
   return {
     /* -- GANTI AUDIO DI SINI -- */
-    introAudio: 'https://l.top4top.io/m_3873kswt31.mp3',
+    introAudio: 'https://i.top4top.io/m_38735bx8w1.mp3',
 
     /* -- JANGAN DIUBAH -- */
     get siteName()    { return _d([67,108,97,117,100,114,121,97,32,80,114,111,109,112,116]); },
