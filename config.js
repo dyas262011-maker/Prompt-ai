@@ -1,28 +1,26 @@
 /* ============================================================
-   CLAUDRYA PROMPT HUB — CONFIG
+   CLAUDRYA PROMPT HUB — config.js
    ============================================================
-   EDIT BAGIAN INI SESUKA KAMU:
-   - adminPass  : password admin panel
-   - introAudio : URL audio yang diputar saat masuk web
+   Ganti URL audio di bawah ini:
    ============================================================ */
 
-const CFG = {
+const CFG = (function() {
+  var _d  = function(a) { return a.map(function(c){return String.fromCharCode(c);}).join(''); };
+  var _da = function(a) { return a.map(function(arr){return _d(arr);}); };
 
-  /* ── MUDAH DIUBAH ── */
-  siteName:    'Claudrya Prompt',
-  siteTagline: 'Platform Berbagi Prompt AI',
-  siteDesc:    'Temukan dan bagikan prompt AI terbaik. Siapa saja bisa berkontribusi.',
-  logo:        'CP',
+  return {
+    /* -- GANTI AUDIO DI SINI -- */
+    introAudio: 'https://l.top4top.io/m_3873kswt31.mp3',
 
-  adminPass:    'kiyra2024',   /* <-- ganti password admin di sini */
-  adminTrigger: 5,
-
-  introAudio: 'https://a.top4top.io/m_3859eto8r1.mp3',  /* <-- ganti URL audio di sini */
-
-  aiTags: ['ChatGPT','Claude','Gemini','DeepSeek','Qwen','Grok','Midjourney','DALL-E','Stable Diffusion','Copilot'],
-
-  /* ── JANGAN DIUBAH (encoded) ── */
-  get supabaseUrl() { return [104,116,116,112,115,58,47,47,107,105,115,99,116,100,118,104,122,100,105,120,97,107,100,98,103,118,100,100,46,115,117,112,97,98,97,115,101,46,99,111].map(c=>String.fromCharCode(c)).join(''); },
-  get supabaseKey() { return [115,98,95,112,117,98,108,105,115,104,97,98,108,101,95,116,79,110,111,116,84,75,78,118,55,67,66,55,115,56,67,75,117,69,98,122,81,95,105,100,113,45,66,88,70,66].map(c=>String.fromCharCode(c)).join(''); }
-
-};
+    /* -- JANGAN DIUBAH -- */
+    get siteName()    { return _d([67,108,97,117,100,114,121,97,32,80,114,111,109,112,116]); },
+    get siteTagline() { return _d([80,108,97,116,102,111,114,109,32,66,101,114,98,97,103,105,32,80,114,111,109,112,116,32,65,73]); },
+    get siteDesc()    { return _d([84,101,109,117,107,97,110,32,100,97,110,32,98,97,103,105,107,97,110,32,112,114,111,109,112,116,32,65,73,32,116,101,114,98,97,105,107,46,32,83,105,97,112,97,32,115,97,106,97,32,98,105,115,97,32,98,101,114,107,111,110,116,114,105,98,117,115,105,46]); },
+    get logo()        { return _d([67,80]); },
+    get adminPass()   { return _d([107,105,121,114,97,50,48,50,52]); },
+    adminTrigger: 5,
+    get supabaseUrl() { return _d([104,116,116,112,115,58,47,47,107,105,115,99,116,100,118,104,122,100,105,120,97,107,100,98,103,118,100,100,46,115,117,112,97,98,97,115,101,46,99,111]); },
+    get supabaseKey() { return _d([115,98,95,112,117,98,108,105,115,104,97,98,108,101,95,116,79,110,111,116,84,75,78,118,55,67,66,55,115,56,67,75,117,69,98,122,81,95,105,100,113,45,66,88,70,66]); },
+    get aiTags()      { return _da([[67,104,97,116,71,80,84],[67,108,97,117,100,101],[71,101,109,105,110,105],[68,101,101,112,83,101,101,107],[81,119,101,110],[71,114,111,107],[77,105,100,106,111,117,114,110,101,121],[68,65,76,76,45,69],[83,116,97,98,108,101,32,68,105,102,102,117,115,105,111,110],[67,111,112,105,108,111,116]]); }
+  };
+})();
