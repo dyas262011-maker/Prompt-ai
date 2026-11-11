@@ -1,1 +1,369 @@
-PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImlkIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ii8+CjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsaW5pdGlhbC1zY2FsZT0xLjAiLz4KPHRpdGxlPkNsYXVkcnlhIFByb21wdCBIdWI8L3RpdGxlPgo8bGluayByZWw9InByZWNvbm5lY3QiIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20iLz4KPGxpbmsgcmVsPSJwcmVjb25uZWN0IiBocmVmPSJodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tIiBjcm9zc29yaWdpbi8+CjxsaW5rIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9QmFybG93K0NvbmRlbnNlZDp3Z2h0QDcwMDs5MDAmZmFtaWx5PVNwYWNlK0dyb3Rlc2s6d2dodEA0MDA7NTAwOzYwMDs3MDAmZmFtaWx5PUpldEJyYWlucytNb25vOndnaHRANDAwOzYwMCZkaXNwbGF5PXN3YXAiIHJlbD0ic3R5bGVzaGVldCIvPgo8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9InN0eWxlLmNzcyIvPgo8L2hlYWQ+Cjxib2R5PgoKPCEtLSBBVURJTyAtLT4KPGF1ZGlvIGlkPSJhdWRpb0JnIiBwcmVsb2FkPSJhdXRvIj48L2F1ZGlvPgoKPGRpdiBpZD0iYXBwIj4KCjwhLS0gTkFWIC0tPgo8bmF2IGNsYXNzPSJuYXYiIGlkPSJtYWluTmF2Ij4KICA8ZGl2IGNsYXNzPSJuYXYtaW4iPgogICAgPGRpdiBjbGFzcz0ibmF2LWxvZ28iIGlkPSJuYXZMb2dvIj4KICAgICAgPGRpdiBjbGFzcz0ibG9nby1ib3giIGlkPSJsb2dvQm94Ij5DUDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJsb2dvLXRleHQiIGlkPSJsb2dvVGV4dCI+Q2xhdWRyeWE8c3Bhbj4uUHJvbXB0PC9zcGFuPjwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJuYXYtdGFicyI+CiAgICAgIDxidXR0b24gY2xhc3M9Im50YWIgb24iIG9uY2xpY2s9ImdwKCdob21lJykiPkhvbWU8L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0ibnRhYiIgb25jbGljaz0iZ3AoJ2piJykiPkphaWxicmVhazwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJudGFiIiBvbmNsaWNrPSJncCgnZm90bycpIj5Gb3RvPC9idXR0b24+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im5hdi1yIj4KICAgICAgPGJ1dHRvbiBjbGFzcz0ibmJ0biBhdWRpby1uYnRuIiBpZD0iYXVkaW9CdG5OYXYiIG9uY2xpY2s9InRvZ2dsZUJnQXVkaW8oKSIgdGl0bGU9IlRvZ2dsZSBBdWRpbyI+CiAgICAgICAgPHNwYW4gY2xhc3M9ImF1ZGlvLWljbyIgaWQ9ImF1ZGlvSWNvTmF2Ij5bID4gXTwvc3Bhbj4KICAgICAgICA8ZGl2IGNsYXNzPSJhLWJhcnMgc3RvcHBlZCIgaWQ9ImFCYXJzTmF2Ij4KICAgICAgICAgIDxkaXYgY2xhc3M9ImEtYmFyIj48L2Rpdj48ZGl2IGNsYXNzPSJhLWJhciI+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJhLWJhciI+PC9kaXY+PGRpdiBjbGFzcz0iYS1iYXIiPjwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICA8L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0ibmJ0biIgb25jbGljaz0idG9nZ2xlVGhlbWUoKSIgaWQ9InRCdG4iIHRpdGxlPSJUaGVtZSI+W0RdPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9Im5idG4iIG9uY2xpY2s9ImdwKCdmYXYnKSIgdGl0bGU9IkZhdm9yaXQiPgogICAgICAgIFsqXTxzcGFuIGNsYXNzPSJuYmFkZ2UiIGlkPSJmQmFkZ2UiPjA8L3NwYW4+CiAgICAgIDwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJuYnRuIiBvbmNsaWNrPSJvcGVuU3JjaCgpIiB0aXRsZT0iQ2FyaSI+Wz9dPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9Im5hdi1hZGQiIG9uY2xpY2s9Im9wZW5BZGQoKSI+WytdIFRhbWJhaDwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJoYmciIGlkPSJoYmciIG9uY2xpY2s9InRvZ2dsZU1vYigpIj4KICAgICAgICA8c3Bhbj48L3NwYW4+PHNwYW4+PC9zcGFuPjxzcGFuPjwvc3Bhbj4KICAgICAgPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9uYXY+Cgo8IS0tIE1PQiAtLT4KPGRpdiBjbGFzcz0ibW9iLW92IiBpZD0ibW9iT3YiIG9uY2xpY2s9ImNsb3NlTW9iKCkiPjwvZGl2Pgo8ZGl2IGNsYXNzPSJuYXYtbW9iIiBpZD0ibmF2TW9iIj4KICA8YnV0dG9uIGNsYXNzPSJubS1idG4gb24iIG9uY2xpY2s9ImdwKCdob21lJyk7Y2xvc2VNb2IoKSI+PiBIb21lPC9idXR0b24+CiAgPGJ1dHRvbiBjbGFzcz0ibm0tYnRuIiBvbmNsaWNrPSJncCgnamInKTtjbG9zZU1vYigpIj4+IEphaWxicmVhazwvYnV0dG9uPgogIDxidXR0b24gY2xhc3M9Im5tLWJ0biIgb25jbGljaz0iZ3AoJ2ZvdG8nKTtjbG9zZU1vYigpIj4+IEZvdG88L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJubS1idG4iIG9uY2xpY2s9ImdwKCdmYXYnKTtjbG9zZU1vYigpIj4+IEZhdm9yaXQ8L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJubS1idG4iIG9uY2xpY2s9InRvZ2dsZUJnQXVkaW8oKTtjbG9zZU1vYigpIj4+IFtBVURJT108L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJubS1hZGQiIG9uY2xpY2s9Im9wZW5BZGQoKTtjbG9zZU1vYigpIj5bK10gVGFtYmFoIFByb21wdDwvYnV0dG9uPgo8L2Rpdj4KCjwhLS0gU0VBUkNIIC0tPgo8ZGl2IGNsYXNzPSJzcmNoLWJhciIgaWQ9InNyY2hCYXIiIHN0eWxlPSJkaXNwbGF5Om5vbmUiPgogIDxkaXYgY2xhc3M9InNyY2gtaW4iPgogICAgPHNwYW4+Wz9dPC9zcGFuPgogICAgPGlucHV0IGlkPSJzcmNoSW5wIiBwbGFjZWhvbGRlcj0iLy8gY2FyaSBwcm9tcHQuLi4iIG9uaW5wdXQ9ImRvU3JjaCh0aGlzLnZhbHVlKSIvPgogICAgPGJ1dHRvbiBvbmNsaWNrPSJjbG9zZVNyY2goKSI+W1hdPC9idXR0b24+CiAgPC9kaXY+CjwvZGl2PgoKPCEtLSBTWU5DIEJBUiAtLT4KPGRpdiBjbGFzcz0ic3luYy1iYXIiIGlkPSJzeW5jQmFyIj4vLyBDT05ORUNUSU5HLi4uPC9kaXY+Cgo8IS0tIEhPTUUgLS0+CjxkaXYgY2xhc3M9InBhZ2Ugb24iIGlkPSJwZ0hvbWUiPgogIDxkaXYgY2xhc3M9ImgtaGVybyIgaWQ9Imhlcm9TZWN0aW9uIj4KICAgIDxkaXYgY2xhc3M9ImgtaGVyby1ncmlkIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImgtaGVyby1iYXIiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0iaC1oZXJvLW9yYiI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJoLWhlcm8tb3JiMiI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJoLXNjYW4td3JhcCI+PGRpdiBjbGFzcz0iaC1zY2FuLWxpbmUiPjwvZGl2PjwvZGl2PgogICAgPGRpdiBjbGFzcz0iaC1pbiI+CiAgICAgIDxkaXYgY2xhc3M9ImgtZXllYnJvdyByZXZlYWwtZG93biIgaWQ9ImhFeWVicm93Ij5bIFBMQVRGT1JNIEJFUkJBR0kgUFJPTVBUIEFJIF08L2Rpdj4KICAgICAgPGgxIGNsYXNzPSJoLXRpdGxlIHJldmVhbC11cCIgaWQ9ImhUaXRsZSIgZGF0YS10ZXh0PSJDTEFVRFJZQSBQUk9NUFQiPkNMQVVEUllBIDxzcGFuPlBST01QVDwvc3Bhbj48L2gxPgogICAgICA8cCBjbGFzcz0iaC1zdWIgcmV2ZWFsLXVwIiBpZD0iaFN1YiIgc3R5bGU9ImFuaW1hdGlvbi1kZWxheTouMTVzIj4vLyBUZW11a2FuIGRhbiBiYWdpa2FuIHByb21wdCBBSSB0ZXJiYWlrICZtZGFzaDsgc2lhcGEgc2FqYSBiaXNhIGJlcmtvbnRyaWJ1c2k8L3A+CiAgICAgIDxkaXYgY2xhc3M9Imgtc3RhdHMgcmV2ZWFsLXVwIiBzdHlsZT0iYW5pbWF0aW9uLWRlbGF5Oi4yNXMiPgogICAgICAgIDxkaXYgY2xhc3M9ImhzdCI+PHN0cm9uZyBpZD0iY250SmIiPjA8L3N0cm9uZz48c3Bhbj5KYWlsYnJlYWs8L3NwYW4+PC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0iaHN0Ij48c3Ryb25nIGlkPSJjbnRGdCI+MDwvc3Ryb25nPjxzcGFuPkZvdG88L3NwYW4+PC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0iaHN0Ij48c3Ryb25nIGlkPSJjbnRGdiI+MDwvc3Ryb25nPjxzcGFuPkZhdm9yaXQ8L3NwYW4+PC9kaXY+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJoLXBhcnRpY2xlcyIgaWQ9ImhQYXJ0aWNsZXMiPjwvZGl2PgogIDwvZGl2PgogIDxkaXYgY2xhc3M9InNlYyIgc3R5bGU9InBhZGRpbmctdG9wOjJyZW0iPgogICAgPGRpdiBjbGFzcz0ic2VjLWhkIj4KICAgICAgPGRpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJzZWMtZXllYnJvdyI+Ly8gVGVyYmFydTwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InNlYy10aXRsZSI+UHJvbXB0IFRlcmJhcnU8L2Rpdj4KICAgICAgPC9kaXY+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0bi1zbSIgb25jbGljaz0ib3BlbkFkZCgpIj5bK10gVGFtYmFoPC9idXR0b24+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9InBsaXN0IiBpZD0iaG9tZUxpc3QiPjwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjwhLS0gSkFJTEJSRUFLIC0tPgo8ZGl2IGNsYXNzPSJwYWdlIiBpZD0icGdKYiI+CiAgPGRpdiBjbGFzcz0icGgiPgogICAgPGRpdiBjbGFzcz0icGgtYmFyIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9InBoLWluIj4KICAgICAgPGRpdiBjbGFzcz0icGgtdGFnIHJldmVhbC1kb3duIj4vLyBKYWlsYnJlYWsgQ29sbGVjdGlvbjwvZGl2PgogICAgICA8aDEgY2xhc3M9InJldmVhbC11cCI+UHJvbXB0IDxlbT5KYWlsYnJlYWs8L2VtPjwvaDE+CiAgICAgIDxwIGNsYXNzPSJyZXZlYWwtdXAiIHN0eWxlPSJhbmltYXRpb24tZGVsYXk6LjFzIj5VbmxvY2sgcG90ZW5zaSBwZW51aCBBSS4gU2lhcGEgc2FqYSBiaXNhIGJlcmJhZ2kgJm1kYXNoOyBzZW11YSBvcmFuZyBiaXNhIGxpaGF0IHJlYWwtdGltZS48L3A+CiAgICAgIDxkaXYgY2xhc3M9InBoLWJvdCByZXZlYWwtdXAiIHN0eWxlPSJhbmltYXRpb24tZGVsYXk6LjJzIj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1jbnQiIGlkPSJqYlRvdGFsIj4vLyAwIFByb21wdDwvZGl2PgogICAgICAgIDxidXR0b24gY2xhc3M9InBoLWFkZCIgb25jbGljaz0ib3BlbkFkZCgnamInKSI+WytdIFRhbWJhaCBQcm9tcHQ8L2J1dHRvbj4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9InBoLW1pbmktY2FyZHMiPgogICAgICA8ZGl2IGNsYXNzPSJwaC1tYyIgb25jbGljaz0ib3BlbkFkZCgnamInKSI+CiAgICAgICAgPGRpdiBjbGFzcz0icGgtbWMtbnVtIj4wMTwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InBoLW1jLWwiPi8vIFN1Ym1pdDwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InBoLW1jLXQiPkJhZ2lrYW4gUHJvbXB0bXU8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1tYy1hcnJvdyI+WytdPC9kaXY+CiAgICAgIDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJwaC1tYyIgb25jbGljaz0iZ3AoJ2ZvdG8nKSI+CiAgICAgICAgPGRpdiBjbGFzcz0icGgtbWMtbnVtIj4wMjwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InBoLW1jLWwiPi8vIEdhbGxlcnk8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1tYy10Ij5MaWhhdCBQcm9tcHQgRm90bzwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InBoLW1jLWFycm93Ij4tLT48L2Rpdj4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJwYm9keSI+CiAgICA8ZGl2IGNsYXNzPSJmLXJvdyI+CiAgICAgIDxkaXYgY2xhc3M9ImYtcGlsbHMiIGlkPSJqYlBpbGxzIj48YnV0dG9uIGNsYXNzPSJmcGlsbCBvbiIgb25jbGljaz0iZkpiKCdzZW11YScsdGhpcykiPkFMTCA8c3BhbiBjbGFzcz0iZmMiIGlkPSJqYkFsbE4iPjA8L3NwYW4+PC9idXR0b24+PC9kaXY+CiAgICAgIDxzZWxlY3QgY2xhc3M9InNydC1zZWwiIG9uY2hhbmdlPSJzSmIodGhpcy52YWx1ZSkiPgogICAgICAgIDxvcHRpb24gdmFsdWU9ImJhcnUiPi8vIFRlcmJhcnU8L29wdGlvbj4KICAgICAgICA8b3B0aW9uIHZhbHVlPSJwb3AiPi8vIFRlcnBvcHVsZXI8L29wdGlvbj4KICAgICAgICA8b3B0aW9uIHZhbHVlPSJheiI+Ly8gQS1aPC9vcHRpb24+CiAgICAgIDwvc2VsZWN0PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJwc3JjaCI+PHNwYW4+Wz9dPC9zcGFuPjxpbnB1dCBpZD0iamJTSSIgcGxhY2Vob2xkZXI9Ii8vIGNhcmkgamFpbGJyZWFrLi4uIiBvbmlucHV0PSJxSmIodGhpcy52YWx1ZSkiLz48L2Rpdj4KICAgIDxkaXYgY2xhc3M9InJtZXRhIj48c3BhbiBjbGFzcz0icmNudCIgaWQ9ImpiSW5mbyI+Ly8gMCBwcm9tcHQ8L3NwYW4+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJwbGlzdCIgaWQ9ImpiTGlzdCI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJlbXB0eSIgaWQ9ImpiRW1wdHkiIHN0eWxlPSJkaXNwbGF5Om5vbmUiPgogICAgICA8ZGl2IGNsYXNzPSJlbXB0eS1jb2RlIj48c3Bhbj4vLyBTVEFUVVM6IDQwNDwvc3Bhbj48YnIvPjxzcGFuPi8vIE1TRzogIm5vIGphaWxicmVhayBwcm9tcHRzIjwvc3Bhbj48L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iZW1wdHktdHRsIj5CZWx1bSBBZGEgUHJvbXB0PC9kaXY+CiAgICAgIDxwPkphZGlsYWggeWFuZyBwZXJ0YW1hIGJlcmJhZ2khPC9wPgogICAgICA8YnV0dG9uIGNsYXNzPSJlbXB0eS1hZGQiIG9uY2xpY2s9Im9wZW5BZGQoJ2piJykiPlsrXSBUYW1iYWggU2VrYXJhbmc8L2J1dHRvbj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjwhLS0gRk9UTyAtLT4KPGRpdiBjbGFzcz0icGFnZSIgaWQ9InBnRm90byI+CiAgPGRpdiBjbGFzcz0icGgiPgogICAgPGRpdiBjbGFzcz0icGgtYmFyIiBzdHlsZT0iYmFja2dyb3VuZDp2YXIoLS1hY2MpIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9InBoLWluIj4KICAgICAgPGRpdiBjbGFzcz0icGgtdGFnIHJldmVhbC1kb3duIiBzdHlsZT0iYm9yZGVyLWNvbG9yOnZhcigtLWFjYyk7Y29sb3I6dmFyKC0tYWNjKTtib3gtc2hhZG93OjJweCAycHggMCB2YXIoLS1hY2MpIj4vLyBGb3RvIENvbGxlY3Rpb248L2Rpdj4KICAgICAgPGgxIGNsYXNzPSJyZXZlYWwtdXAiPlByb21wdCA8ZW0gc3R5bGU9ImNvbG9yOnZhcigtLWFjYykiPkZvdG88L2VtPjwvaDE+CiAgICAgIDxwIGNsYXNzPSJyZXZlYWwtdXAiIHN0eWxlPSJhbmltYXRpb24tZGVsYXk6LjFzIj5IYXNpbGthbiBnYW1iYXIgQUkgbWVtdWthdS4gQmFnaWthbiBwcm9tcHRtdSE8L3A+CiAgICAgIDxkaXYgY2xhc3M9InBoLWJvdCByZXZlYWwtdXAiIHN0eWxlPSJhbmltYXRpb24tZGVsYXk6LjJzIj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1jbnQiIGlkPSJmdFRvdGFsIj4vLyAwIFByb21wdDwvZGl2PgogICAgICAgIDxidXR0b24gY2xhc3M9InBoLWFkZCIgb25jbGljaz0ib3BlbkFkZCgnZm90bycpIj5bK10gVGFtYmFoIFByb21wdDwvYnV0dG9uPgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0icGgtbWluaS1jYXJkcyI+CiAgICAgIDxkaXYgY2xhc3M9InBoLW1jIiBvbmNsaWNrPSJvcGVuQWRkKCdmb3RvJykiPgogICAgICAgIDxkaXYgY2xhc3M9InBoLW1jLW51bSI+MDE8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1tYy1sIj4vLyBVcGxvYWQ8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1tYy10Ij5CYWdpa2FuIFByb21wdCBGb3RvPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0icGgtbWMtYXJyb3ciPlsrXTwvZGl2PgogICAgICA8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0icGgtbWMiIG9uY2xpY2s9ImdwKCdqYicpIj4KICAgICAgICA8ZGl2IGNsYXNzPSJwaC1tYy1udW0iPjAyPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0icGgtbWMtbCI+Ly8gSmFpbGJyZWFrPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0icGgtbWMtdCI+TGloYXQgUHJvbXB0IEpCPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0icGgtbWMtYXJyb3ciPi0tPjwvZGl2PgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvZGl2PgogIDxkaXYgY2xhc3M9InBib2R5Ij4KICAgIDxkaXYgY2xhc3M9ImYtcm93Ij4KICAgICAgPGRpdiBjbGFzcz0iZi1waWxscyIgaWQ9ImZ0UGlsbHMiPjxidXR0b24gY2xhc3M9ImZwaWxsIG9uIiBvbmNsaWNrPSJmRnQoJ3NlbXVhJyx0aGlzKSI+QUxMIDxzcGFuIGNsYXNzPSJmYyIgaWQ9ImZ0QWxsTiI+MDwvc3Bhbj48L2J1dHRvbj48L2Rpdj4KICAgICAgPHNlbGVjdCBjbGFzcz0ic3J0LXNlbCIgb25jaGFuZ2U9InNGdCh0aGlzLnZhbHVlKSI+CiAgICAgICAgPG9wdGlvbiB2YWx1ZT0iYmFydSI+Ly8gVGVyYmFydTwvb3B0aW9uPgogICAgICAgIDxvcHRpb24gdmFsdWU9InBvcCI+Ly8gVGVycG9wdWxlcjwvb3B0aW9uPgogICAgICAgIDxvcHRpb24gdmFsdWU9ImF6Ij4vLyBBLVo8L29wdGlvbj4KICAgICAgPC9zZWxlY3Q+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9InBzcmNoIj48c3Bhbj5bP108L3NwYW4+PGlucHV0IGlkPSJmdFNJIiBwbGFjZWhvbGRlcj0iLy8gY2FyaSBmb3RvLi4uIiBvbmlucHV0PSJxRnQodGhpcy52YWx1ZSkiLz48L2Rpdj4KICAgIDxkaXYgY2xhc3M9InJtZXRhIj48c3BhbiBjbGFzcz0icmNudCIgaWQ9ImZ0SW5mbyI+Ly8gMCBwcm9tcHQ8L3NwYW4+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJmZ3JpZCIgaWQ9ImZ0R3JpZCI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJlbXB0eSIgaWQ9ImZ0RW1wdHkiIHN0eWxlPSJkaXNwbGF5Om5vbmUiPgogICAgICA8ZGl2IGNsYXNzPSJlbXB0eS1jb2RlIj48c3Bhbj4vLyBTVEFUVVM6IDQwNDwvc3Bhbj48YnIvPjxzcGFuPi8vIE1TRzogIm5vIGZvdG8gcHJvbXB0cyI8L3NwYW4+PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImVtcHR5LXR0bCI+QmVsdW0gQWRhIEZvdG88L2Rpdj4KICAgICAgPHA+QmFnaWthbiBwcm9tcHQgZm90byB0ZXJiYWlrbXUhPC9wPgogICAgICA8YnV0dG9uIGNsYXNzPSJlbXB0eS1hZGQiIG9uY2xpY2s9Im9wZW5BZGQoJ2ZvdG8nKSI+WytdIFRhbWJhaCBTZWthcmFuZzwvYnV0dG9uPgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPCEtLSBGQVZPUklUIC0tPgo8ZGl2IGNsYXNzPSJwYWdlIiBpZD0icGdGYXYiPgogIDxkaXYgY2xhc3M9InBoIj4KICAgIDxkaXYgY2xhc3M9InBoLWJhciIgc3R5bGU9ImJhY2tncm91bmQ6dmFyKC0tZ29sZCkiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0icGgtaW4iPgogICAgICA8ZGl2IGNsYXNzPSJwaC10YWcgcmV2ZWFsLWRvd24iIHN0eWxlPSJib3JkZXItY29sb3I6dmFyKC0tZ29sZCk7Y29sb3I6dmFyKC0tZ29sZCk7Ym94LXNoYWRvdzoycHggMnB4IDAgdmFyKC0tZ29sZCkiPi8vIEZhdm9yaXQ8L2Rpdj4KICAgICAgPGgxIGNsYXNzPSJyZXZlYWwtdXAiPktvbGVrc2kgPGVtIHN0eWxlPSJjb2xvcjp2YXIoLS1nb2xkKSI+RmF2b3JpdDwvZW0+PC9oMT4KICAgICAgPHAgY2xhc3M9InJldmVhbC11cCIgc3R5bGU9ImFuaW1hdGlvbi1kZWxheTouMXMiPlByb21wdCB5YW5nIGthbXUgc2ltcGFuICh0ZXJzaW1wYW4gbG9rYWwgZGkgYnJvd3NlciBrYW11KS48L3A+CiAgICA8L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJwYm9keSI+CiAgICA8ZGl2IGNsYXNzPSJwbGlzdCIgaWQ9ImZhdkxpc3QiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0iZW1wdHkiIGlkPSJmYXZFbXB0eSIgc3R5bGU9ImRpc3BsYXk6bm9uZSI+CiAgICAgIDxkaXYgY2xhc3M9ImVtcHR5LWNvZGUiPjxzcGFuPi8vIFNUQVRVUzogRU1QVFk8L3NwYW4+PGJyLz48c3Bhbj4vLyBNU0c6ICJubyBmYXZvcml0ZXMiPC9zcGFuPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJlbXB0eS10dGwiPkJlbHVtIEFkYSBGYXZvcml0PC9kaXY+CiAgICAgIDxwPlRla2FuIFsqXSBkaSBwcm9tcHQgdW50dWsgbWVueWltcGFuLjwvcD4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjwhLS0gU0VBUkNIIC0tPgo8ZGl2IGNsYXNzPSJwYWdlIiBpZD0icGdTZWFyY2giPgogIDxkaXYgY2xhc3M9InBib2R5IiBzdHlsZT0icGFkZGluZy10b3A6MS4ycmVtIj4KICAgIDxkaXYgY2xhc3M9InJjbnQiIGlkPSJzckluZm8iIHN0eWxlPSJtYXJnaW4tYm90dG9tOi45cmVtIj4vLyBrZXRpayB1bnR1ayBtZW5jYXJpLi4uPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJwbGlzdCIgaWQ9InNyTGlzdCI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJlbXB0eSIgaWQ9InNyRW1wdHkiIHN0eWxlPSJkaXNwbGF5Om5vbmUiPgogICAgICA8ZGl2IGNsYXNzPSJlbXB0eS1jb2RlIj48c3Bhbj4vLyBOT19SRVNVTFRTPC9zcGFuPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJlbXB0eS10dGwiPlRpZGFrIERpdGVtdWthbjwvZGl2PgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPC9kaXY+PCEtLSAvYXBwIC0tPgoKPCEtLSBNT0RBTDogVEFNQkFIIFBST01QVCAtLT4KPGRpdiBjbGFzcz0ibW9kYWwiIGlkPSJtQWRkIiBvbmNsaWNrPSJpZihldmVudC50YXJnZXQ9PT10aGlzKWNtKCdtQWRkJykiPgogIDxkaXYgY2xhc3M9Im1ib3giPgogICAgPGJ1dHRvbiBjbGFzcz0ibWMiIG9uY2xpY2s9ImNtKCdtQWRkJykiPltYXTwvYnV0dG9uPgogICAgPGRpdiBjbGFzcz0ibS10dGwiPlsrXSBUYW1iYWggUHJvbXB0PC9kaXY+CiAgICA8cCBjbGFzcz0ibS1zdWIiPi8vIFNpYXBhIHNhamEgYmlzYSBiZXJiYWdpICZtZGFzaDsgbGFuZ3N1bmcgcmVhbC10aW1lIGtlIHNlbXVhIG9yYW5nPC9wPgogICAgPGRpdiBjbGFzcz0idHlwZS10YWJzIj4KICAgICAgPGJ1dHRvbiBjbGFzcz0idHlwZS10YWIgb24iIGlkPSJ0eXBKYiIgb25jbGljaz0ic3dUeXBlKCdqYicpIj5bIEphaWxicmVhayBdPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9InR5cGUtdGFiIiBpZD0idHlwRnQiIG9uY2xpY2s9InN3VHlwZSgnZm90bycpIj5bIEZvdG8gXTwvYnV0dG9uPgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJmdyI+CiAgICAgIDxkaXYgY2xhc3M9ImZnIj48bGFiZWw+TmFtYSBLYW11IChvcHNpb25hbCk8L2xhYmVsPjxpbnB1dCBpZD0iYWRkTm0iIHBsYWNlaG9sZGVyPSIvLyBuYW1hIGF0YXUgdXNlcm5hbWUuLi4iLz48L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iZmciPjxsYWJlbD5KdWR1bCBQcm9tcHQgKjwvbGFiZWw+PGlucHV0IGlkPSJhZGRUaSIgcGxhY2Vob2xkZXI9Ii8vIG5hbWEgcHJvbXB0Li4uIi8+PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImZnIj48bGFiZWw+RGVza3JpcHNpPC9sYWJlbD48aW5wdXQgaWQ9ImFkZERlIiBwbGFjZWhvbGRlcj0iLy8gamVsYXNrYW4ga2VndW5hYW4uLi4iLz48L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iZmciPjxsYWJlbD5UYWcgQUkgKHBpc2FoIGtvbWEpICo8L2xhYmVsPjxpbnB1dCBpZD0iYWRkQXQiIHBsYWNlaG9sZGVyPSIvLyBDaGF0R1BULCBDbGF1ZGUsIERlZXBTZWVrLi4uIi8+PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImZnIj48bGFiZWw+S2F0ZWdvcmk8L2xhYmVsPjxpbnB1dCBpZD0iYWRkQ2EiIHBsYWNlaG9sZGVyPSIvLyBSb2xlcGxheSwgQ29kaW5nLCBSZWFsaXN0aWMuLi4iLz48L2Rpdj4KICAgICAgPGRpdiBpZD0iYWRkRk9ubHkiPgogICAgICAgIDxkaXYgY2xhc3M9ImZnIj4KICAgICAgICAgIDxsYWJlbD5VUkwgR2FtYmFyIChwYXN0ZSBsaW5rIGdhbWJhcik8L2xhYmVsPgogICAgICAgICAgPGlucHV0IGlkPSJhZGRJVSIgcGxhY2Vob2xkZXI9Ii8vIGh0dHBzOi8vaS5pbWd1ci5jb20veHh4LmpwZyIgb25pbnB1dD0icHZVKHRoaXMudmFsdWUpIi8+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJpbWctcHYiIGlkPSJhZGRQdiIgc3R5bGU9Im1hcmdpbi10b3A6LjVyZW0iPi8vIHByZXZpZXcgZ2FtYmFyIG11bmN1bCBkaSBzaW5pPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgIDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJmZyI+CiAgICAgICAgPGxhYmVsPkxhYmVsPC9sYWJlbD4KICAgICAgICA8ZGl2IGNsYXNzPSJjaGstcm93Ij4KICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY2hrIj48aW5wdXQgdHlwZT0iY2hlY2tib3giIGlkPSJhZGRMbiIvPiBbTkVXXSBCYXJ1PC9sYWJlbD4KICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY2hrIj48aW5wdXQgdHlwZT0iY2hlY2tib3giIGlkPSJhZGRMaCIvPiBbSE9UXSBQb3B1bGVyPC9sYWJlbD4KICAgICAgICA8L2Rpdj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImZnIj48bGFiZWw+SXNpIFByb21wdCAqPC9sYWJlbD48dGV4dGFyZWEgaWQ9ImFkZENvIiByb3dzPSI3IiBwbGFjZWhvbGRlcj0iLy8gdGVtcGVsIHRla3MgcHJvbXB0IGxlbmdrYXAgZGkgc2luaS4uLiI+PC90ZXh0YXJlYT48L2Rpdj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0iZXJyLWJ4IiBpZD0iYWRkRXJyIiBzdHlsZT0iZGlzcGxheTpub25lIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im9rLWJ4IiBpZD0iYWRkT2siPi8vIE9LOiBwcm9tcHQgYmVyaGFzaWwgZGliYWdpa2FuIGtlIHNlbXVhIG9yYW5nITwvZGl2PgogICAgPGRpdiBjbGFzcz0ibWFjdC1yb3ciPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tZyIgb25jbGljaz0iY20oJ21BZGQnKSI+W0VTQ10gQmF0YWw8L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuLXAiIGlkPSJhZGRCdG4iIG9uY2xpY2s9ImRvQWRkKCkiPltTRU5EXSBLaXJpbTwvYnV0dG9uPgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPCEtLSBNT0RBTDogREVUQUlMIEpCIC0tPgo8ZGl2IGNsYXNzPSJtb2RhbCIgaWQ9Im1EZXQiIG9uY2xpY2s9ImlmKGV2ZW50LnRhcmdldD09PXRoaXMpY20oJ21EZXQnKSI+CiAgPGRpdiBjbGFzcz0ibWJveCI+CiAgICA8YnV0dG9uIGNsYXNzPSJtYyIgb25jbGljaz0iY20oJ21EZXQnKSI+W1hdPC9idXR0b24+CiAgICA8ZGl2IGNsYXNzPSJtLWhkIiBpZD0ibURldEhkIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im0tdGFicyI+CiAgICAgIDxidXR0b24gY2xhc3M9Im10YiBvbiIgaWQ9Im10YjEiIG9uY2xpY2s9InN3RGV0KCdwJykiPi8vIFByb21wdDwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJtdGIiIGlkPSJtdGIyIiBvbmNsaWNrPSJzd0RldCgnaScpIj4vLyBJbmZvPC9idXR0b24+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im0tYm9keSI+CiAgICAgIDxkaXYgaWQ9InRhYlAiPjxkaXYgY2xhc3M9InB0dyI+PHByZSBjbGFzcz0icHR4dCIgaWQ9ImRldFR4dCI+PC9wcmU+PC9kaXY+PC9kaXY+CiAgICAgIDxkaXYgaWQ9InRhYkkiIHN0eWxlPSJkaXNwbGF5Om5vbmUiPjxkaXYgY2xhc3M9Im0taW5mbyI+PHRhYmxlIGlkPSJkZXRUYmwiPjwvdGFibGU+PC9kaXY+PC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im0tYWN0cyI+CiAgICAgIDxidXR0b24gY2xhc3M9Im1hIG1hLWNwIiBpZD0iYnRuQ3AiIG9uY2xpY2s9ImRvQ3AoKSI+W0NQXSBTYWxpbjwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJtYSBtYS1kbCIgb25jbGljaz0iZG9EbCgpIj5bRExdIFVuZHVoPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9Im1hIG1hLXNoIiBvbmNsaWNrPSJkb1NoKCkiPltTSF0gQmFnaWthbjwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJtYSBtYS1mdiIgaWQ9ImJ0bkZ2IiBvbmNsaWNrPSJkb0Z2KCkiPlsqXSBTaW1wYW48L2J1dHRvbj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjwhLS0gTU9EQUw6IERFVEFJTCBGT1RPIC0tPgo8ZGl2IGNsYXNzPSJtb2RhbCIgaWQ9Im1Gb3RvIiBvbmNsaWNrPSJpZihldmVudC50YXJnZXQ9PT10aGlzKWNtKCdtRm90bycpIj4KICA8ZGl2IGNsYXNzPSJtYm94IG1ib3gtZnQiPgogICAgPGJ1dHRvbiBjbGFzcz0ibWMiIG9uY2xpY2s9ImNtKCdtRm90bycpIj5bWF08L2J1dHRvbj4KICAgIDxkaXYgY2xhc3M9ImZkLWltZyIgaWQ9ImZkSW1nIj4vLyBubyBpbWFnZTwvZGl2PgogICAgPGRpdiBjbGFzcz0ibS1oZCIgaWQ9Im1Gb3RvSGQiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0ibS1ib2R5Ij48ZGl2IGNsYXNzPSJwdHciPjxwcmUgY2xhc3M9InB0eHQiIGlkPSJmb3RvVHh0Ij48L3ByZT48L2Rpdj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im0tYWN0cyI+CiAgICAgIDxidXR0b24gY2xhc3M9Im1hIG1hLWNwIiBvbmNsaWNrPSJkb0NwRm90bygpIj5bQ1BdIFNhbGluPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9Im1hIG1hLWRsIiBvbmNsaWNrPSJkb0RsRm90bygpIj5bRExdIFVuZHVoPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9Im1hIG1hLXNoIiBvbmNsaWNrPSJkb1NoRm90bygpIj5bU0hdIEJhZ2lrYW48L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0ibWEgbWEtZnYiIGlkPSJmdkZvdG8iIG9uY2xpY2s9ImRvRnZGb3RvKCkiPlsqXSBTaW1wYW48L2J1dHRvbj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjwhLS0gTU9EQUw6IEFETUlOIExPR0lOIC0tPgo8ZGl2IGNsYXNzPSJtb2RhbCIgaWQ9Im1BZEwiIG9uY2xpY2s9ImlmKGV2ZW50LnRhcmdldD09PXRoaXMpY20oJ21BZEwnKSI+CiAgPGRpdiBjbGFzcz0ibWJveCBtYm94LXNtIj4KICAgIDxidXR0b24gY2xhc3M9Im1jIiBvbmNsaWNrPSJjbSgnbUFkTCcpIj5bWF08L2J1dHRvbj4KICAgIDxkaXYgc3R5bGU9InRleHQtYWxpZ246Y2VudGVyO3BhZGRpbmc6MS4zcmVtIDEuMnJlbSAuN3JlbSI+CiAgICAgIDxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OnZhcigtLWNvbmQpO2ZvbnQtc2l6ZTozcmVtO2ZvbnQtd2VpZ2h0OjkwMDtjb2xvcjp2YXIoLS1wMik7bGluZS1oZWlnaHQ6MSI+W0FETUlOXTwvZGl2PgogICAgICA8ZGl2IHN0eWxlPSJmb250LWZhbWlseTp2YXIoLS1jb25kKTtmb250LXNpemU6MXJlbTtmb250LXdlaWdodDo5MDA7dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlO2xldHRlci1zcGFjaW5nOjFweDttYXJnaW4tdG9wOi40cmVtIj5BZG1pbiBQYW5lbDwvZGl2PgogICAgICA8ZGl2IHN0eWxlPSJmb250LWZhbWlseTp2YXIoLS1tb25vKTtmb250LXNpemU6LjcycmVtO2NvbG9yOnZhcigtLXR4dDIpO21hcmdpbi10b3A6LjNyZW0iPi8vIG1hc3Vra2FuIHBhc3N3b3JkIGFkbWluPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImZ3IiBzdHlsZT0icGFkZGluZzowIDEuMnJlbSAuMnJlbSI+CiAgICAgIDxkaXYgY2xhc3M9ImZnIj48bGFiZWw+UGFzc3dvcmQ8L2xhYmVsPgogICAgICAgIDxpbnB1dCB0eXBlPSJwYXNzd29yZCIgaWQ9ImFkUHciIHBsYWNlaG9sZGVyPSIvLyBwYXNzd29yZC4uLiIgb25rZXlkb3duPSJpZihldmVudC5rZXk9PT0nRW50ZXInKWNoa0FkKCkiLz4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImVyci1ieCIgaWQ9ImFkRXJyIiBzdHlsZT0iZGlzcGxheTpub25lO21hcmdpbjouMnJlbSAxLjJyZW0gLjY1cmVtIj4vLyBFUlJPUjogcGFzc3dvcmQgc2FsYWg8L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im1hY3Qtcm93Ij4KICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuLWciIG9uY2xpY2s9ImNtKCdtQWRMJykiPltFU0NdIEJhdGFsPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0bi1wIiBvbmNsaWNrPSJjaGtBZCgpIj5bT0tdIE1hc3VrPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9kaXY+Cgo8IS0tIEFETUlOIFBBTkVMIC0tPgo8ZGl2IGNsYXNzPSJhZG1pbiIgaWQ9ImFkbWluUGFuZWwiPgogIDxkaXYgY2xhc3M9ImFkLWhkIj4KICAgIDxoMj5bQURNSU5dIC8vIFBhbmVsIEtvbnRyb2w8L2gyPgogICAgPGRpdiBzdHlsZT0iZGlzcGxheTpmbGV4O2dhcDouNHJlbSI+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0bi1zbSIgb25jbGljaz0iYWRUYWIoJ2piJykiPlsgSkIgXTwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tc20iIG9uY2xpY2s9ImFkVGFiKCdmdCcpIj5bIEZPVE8gXTwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tc20iIG9uY2xpY2s9InN5bmNOb3coKSI+WyBTWU5DIF08L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuLXNtIHIiIG9uY2xpY2s9ImNsb3NlQWRtaW4oKSI+WyBDTE9TRSBdPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJhZC1ib2R5Ij4KICAgIDxkaXYgY2xhc3M9ImFkLXRhYiBvbiIgaWQ9ImFkSmIiPgogICAgICA8ZGl2IGNsYXNzPSJhZC1zZWMiPi8vIFByb21wdCBKYWlsYnJlYWsg4oCUIFRPVEFMOiA8c3BhbiBpZD0iamJBZENudCI+MDwvc3Bhbj48L2Rpdj4KICAgICAgPGRpdiBpZD0iamJBZExpc3QiPjwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJhZC10YWIiIGlkPSJhZEZ0Ij4KICAgICAgPGRpdiBjbGFzcz0iYWQtc2VjIj4vLyBQcm9tcHQgRm90byDigJQgVE9UQUw6IDxzcGFuIGlkPSJmdEFkQ250Ij4wPC9zcGFuPjwvZGl2PgogICAgICA8ZGl2IGlkPSJmdEFkTGlzdCI+PC9kaXY+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9kaXY+Cgo8IS0tIFRPQVNUIC0tPgo8ZGl2IGNsYXNzPSJ0b2FzdCIgaWQ9InRvYXN0Ij48c3BhbiBpZD0idG9hc3RUIj48L3NwYW4+PC9kaXY+Cgo8c2NyaXB0IHNyYz0iY29uZmlnLmpzIj48L3NjcmlwdD4KPHNjcmlwdCBzcmM9ImFwcC5qcyI+PC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPg==
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Claudrya Prompt Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- AUDIO -->
+<audio id="audioBg" preload="auto"></audio>
+
+<div id="app">
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-in">
+    <div class="nav-logo" id="navLogo">
+      <div class="logo-box" id="logoBox">CP</div>
+      <div class="logo-text" id="logoText">Claudrya<span>.Prompt</span></div>
+    </div>
+    <div class="nav-tabs">
+      <button class="ntab on" onclick="gp('home')">Home</button>
+      <button class="ntab" onclick="gp('jb')">Jailbreak</button>
+      <button class="ntab" onclick="gp('foto')">Foto</button>
+    </div>
+    <div class="nav-r">
+      <button class="nbtn audio-nbtn" id="audioBtnNav" onclick="toggleBgAudio()" title="Toggle Audio">
+        <span class="audio-ico" id="audioIcoNav">[ > ]</span>
+        <div class="a-bars stopped" id="aBarsNav">
+          <div class="a-bar"></div><div class="a-bar"></div>
+          <div class="a-bar"></div><div class="a-bar"></div>
+        </div>
+      </button>
+      <button class="nbtn" onclick="toggleTheme()" id="tBtn" title="Theme">[D]</button>
+      <button class="nbtn" onclick="gp('fav')" title="Favorit">
+        [*]<span class="nbadge" id="fBadge">0</span>
+      </button>
+      <button class="nbtn" onclick="openSrch()" title="Cari">[?]</button>
+      <button class="nav-add" onclick="openAdd()">[+] Tambah</button>
+      <button class="hbg" id="hbg" onclick="toggleMob()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOB -->
+<div class="mob-ov" id="mobOv" onclick="closeMob()"></div>
+<div class="nav-mob" id="navMob">
+  <button class="nm-btn on" onclick="gp('home');closeMob()">> Home</button>
+  <button class="nm-btn" onclick="gp('jb');closeMob()">> Jailbreak</button>
+  <button class="nm-btn" onclick="gp('foto');closeMob()">> Foto</button>
+  <button class="nm-btn" onclick="gp('fav');closeMob()">> Favorit</button>
+  <button class="nm-btn" onclick="toggleBgAudio();closeMob()">> [AUDIO]</button>
+  <button class="nm-add" onclick="openAdd();closeMob()">[+] Tambah Prompt</button>
+</div>
+
+<!-- SEARCH -->
+<div class="srch-bar" id="srchBar" style="display:none">
+  <div class="srch-in">
+    <span>[?]</span>
+    <input id="srchInp" placeholder="// cari prompt..." oninput="doSrch(this.value)"/>
+    <button onclick="closeSrch()">[X]</button>
+  </div>
+</div>
+
+<!-- SYNC BAR -->
+<div class="sync-bar" id="syncBar">// CONNECTING...</div>
+
+<!-- HOME -->
+<div class="page on" id="pgHome">
+  <div class="h-hero" id="heroSection">
+    <div class="h-hero-grid"></div>
+    <div class="h-hero-bar"></div>
+    <div class="h-hero-orb"></div>
+    <div class="h-hero-orb2"></div>
+    <div class="h-scan-wrap"><div class="h-scan-line"></div></div>
+    <div class="h-in">
+      <div class="h-eyebrow reveal-down" id="hEyebrow">[ PLATFORM BERBAGI PROMPT AI ]</div>
+      <h1 class="h-title reveal-up" id="hTitle" data-text="CLAUDRYA PROMPT">CLAUDRYA <span>PROMPT</span></h1>
+      <p class="h-sub reveal-up" id="hSub" style="animation-delay:.15s">// Temukan dan bagikan prompt AI terbaik &mdash; siapa saja bisa berkontribusi</p>
+      <div class="h-stats reveal-up" style="animation-delay:.25s">
+        <div class="hst"><strong id="cntJb">0</strong><span>Jailbreak</span></div>
+        <div class="hst"><strong id="cntFt">0</strong><span>Foto</span></div>
+        <div class="hst"><strong id="cntFv">0</strong><span>Favorit</span></div>
+      </div>
+    </div>
+    <div class="h-particles" id="hParticles"></div>
+  </div>
+  <div class="sec" style="padding-top:2rem">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-eyebrow">// Terbaru</div>
+        <div class="sec-title">Prompt Terbaru</div>
+      </div>
+      <button class="btn-sm" onclick="openAdd()">[+] Tambah</button>
+    </div>
+    <div class="plist" id="homeList"></div>
+  </div>
+</div>
+
+<!-- JAILBREAK -->
+<div class="page" id="pgJb">
+  <div class="ph">
+    <div class="ph-bar"></div>
+    <div class="ph-in">
+      <div class="ph-tag reveal-down">// Jailbreak Collection</div>
+      <h1 class="reveal-up">Prompt <em>Jailbreak</em></h1>
+      <p class="reveal-up" style="animation-delay:.1s">Unlock potensi penuh AI. Siapa saja bisa berbagi &mdash; semua orang bisa lihat real-time.</p>
+      <div class="ph-bot reveal-up" style="animation-delay:.2s">
+        <div class="ph-cnt" id="jbTotal">// 0 Prompt</div>
+        <button class="ph-add" onclick="openAdd('jb')">[+] Tambah Prompt</button>
+      </div>
+    </div>
+    <div class="ph-mini-cards">
+      <div class="ph-mc" onclick="openAdd('jb')">
+        <div class="ph-mc-num">01</div>
+        <div class="ph-mc-l">// Submit</div>
+        <div class="ph-mc-t">Bagikan Promptmu</div>
+        <div class="ph-mc-arrow">[+]</div>
+      </div>
+      <div class="ph-mc" onclick="gp('foto')">
+        <div class="ph-mc-num">02</div>
+        <div class="ph-mc-l">// Gallery</div>
+        <div class="ph-mc-t">Lihat Prompt Foto</div>
+        <div class="ph-mc-arrow">--></div>
+      </div>
+    </div>
+  </div>
+  <div class="pbody">
+    <div class="f-row">
+      <div class="f-pills" id="jbPills"><button class="fpill on" onclick="fJb('semua',this)">ALL <span class="fc" id="jbAllN">0</span></button></div>
+      <select class="srt-sel" onchange="sJb(this.value)">
+        <option value="baru">// Terbaru</option>
+        <option value="pop">// Terpopuler</option>
+        <option value="az">// A-Z</option>
+      </select>
+    </div>
+    <div class="psrch"><span>[?]</span><input id="jbSI" placeholder="// cari jailbreak..." oninput="qJb(this.value)"/></div>
+    <div class="rmeta"><span class="rcnt" id="jbInfo">// 0 prompt</span></div>
+    <div class="plist" id="jbList"></div>
+    <div class="empty" id="jbEmpty" style="display:none">
+      <div class="empty-code"><span>// STATUS: 404</span><br/><span>// MSG: "no jailbreak prompts"</span></div>
+      <div class="empty-ttl">Belum Ada Prompt</div>
+      <p>Jadilah yang pertama berbagi!</p>
+      <button class="empty-add" onclick="openAdd('jb')">[+] Tambah Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOTO -->
+<div class="page" id="pgFoto">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--acc)"></div>
+    <div class="ph-in">
+      <div class="ph-tag reveal-down" style="border-color:var(--acc);color:var(--acc);box-shadow:2px 2px 0 var(--acc)">// Foto Collection</div>
+      <h1 class="reveal-up">Prompt <em style="color:var(--acc)">Foto</em></h1>
+      <p class="reveal-up" style="animation-delay:.1s">Hasilkan gambar AI memukau. Bagikan promptmu!</p>
+      <div class="ph-bot reveal-up" style="animation-delay:.2s">
+        <div class="ph-cnt" id="ftTotal">// 0 Prompt</div>
+        <button class="ph-add" onclick="openAdd('foto')">[+] Tambah Prompt</button>
+      </div>
+    </div>
+    <div class="ph-mini-cards">
+      <div class="ph-mc" onclick="openAdd('foto')">
+        <div class="ph-mc-num">01</div>
+        <div class="ph-mc-l">// Upload</div>
+        <div class="ph-mc-t">Bagikan Prompt Foto</div>
+        <div class="ph-mc-arrow">[+]</div>
+      </div>
+      <div class="ph-mc" onclick="gp('jb')">
+        <div class="ph-mc-num">02</div>
+        <div class="ph-mc-l">// Jailbreak</div>
+        <div class="ph-mc-t">Lihat Prompt JB</div>
+        <div class="ph-mc-arrow">--></div>
+      </div>
+    </div>
+  </div>
+  <div class="pbody">
+    <div class="f-row">
+      <div class="f-pills" id="ftPills"><button class="fpill on" onclick="fFt('semua',this)">ALL <span class="fc" id="ftAllN">0</span></button></div>
+      <select class="srt-sel" onchange="sFt(this.value)">
+        <option value="baru">// Terbaru</option>
+        <option value="pop">// Terpopuler</option>
+        <option value="az">// A-Z</option>
+      </select>
+    </div>
+    <div class="psrch"><span>[?]</span><input id="ftSI" placeholder="// cari foto..." oninput="qFt(this.value)"/></div>
+    <div class="rmeta"><span class="rcnt" id="ftInfo">// 0 prompt</span></div>
+    <div class="fgrid" id="ftGrid"></div>
+    <div class="empty" id="ftEmpty" style="display:none">
+      <div class="empty-code"><span>// STATUS: 404</span><br/><span>// MSG: "no foto prompts"</span></div>
+      <div class="empty-ttl">Belum Ada Foto</div>
+      <p>Bagikan prompt foto terbaikmu!</p>
+      <button class="empty-add" onclick="openAdd('foto')">[+] Tambah Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAVORIT -->
+<div class="page" id="pgFav">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--gold)"></div>
+    <div class="ph-in">
+      <div class="ph-tag reveal-down" style="border-color:var(--gold);color:var(--gold);box-shadow:2px 2px 0 var(--gold)">// Favorit</div>
+      <h1 class="reveal-up">Koleksi <em style="color:var(--gold)">Favorit</em></h1>
+      <p class="reveal-up" style="animation-delay:.1s">Prompt yang kamu simpan (tersimpan lokal di browser kamu).</p>
+    </div>
+  </div>
+  <div class="pbody">
+    <div class="plist" id="favList"></div>
+    <div class="empty" id="favEmpty" style="display:none">
+      <div class="empty-code"><span>// STATUS: EMPTY</span><br/><span>// MSG: "no favorites"</span></div>
+      <div class="empty-ttl">Belum Ada Favorit</div>
+      <p>Tekan [*] di prompt untuk menyimpan.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="page" id="pgSearch">
+  <div class="pbody" style="padding-top:1.2rem">
+    <div class="rcnt" id="srInfo" style="margin-bottom:.9rem">// ketik untuk mencari...</div>
+    <div class="plist" id="srList"></div>
+    <div class="empty" id="srEmpty" style="display:none">
+      <div class="empty-code"><span>// NO_RESULTS</span></div>
+      <div class="empty-ttl">Tidak Ditemukan</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- MODAL: TAMBAH PROMPT -->
+<div class="modal" id="mAdd" onclick="if(event.target===this)cm('mAdd')">
+  <div class="mbox">
+    <button class="mc" onclick="cm('mAdd')">[X]</button>
+    <div class="m-ttl">[+] Tambah Prompt</div>
+    <p class="m-sub">// Siapa saja bisa berbagi &mdash; langsung real-time ke semua orang</p>
+    <div class="type-tabs">
+      <button class="type-tab on" id="typJb" onclick="swType('jb')">[ Jailbreak ]</button>
+      <button class="type-tab" id="typFt" onclick="swType('foto')">[ Foto ]</button>
+    </div>
+    <div class="fw">
+      <div class="fg"><label>Nama Kamu (opsional)</label><input id="addNm" placeholder="// nama atau username..."/></div>
+      <div class="fg"><label>Judul Prompt *</label><input id="addTi" placeholder="// nama prompt..."/></div>
+      <div class="fg"><label>Deskripsi</label><input id="addDe" placeholder="// jelaskan kegunaan..."/></div>
+      <div class="fg"><label>Tag AI (pisah koma) *</label><input id="addAt" placeholder="// ChatGPT, Claude, DeepSeek..."/></div>
+      <div class="fg"><label>Kategori</label><input id="addCa" placeholder="// Roleplay, Coding, Realistic..."/></div>
+      <div id="addFOnly">
+        <div class="fg">
+          <label>URL Gambar (paste link gambar)</label>
+          <input id="addIU" placeholder="// https://i.imgur.com/xxx.jpg" oninput="pvU(this.value)"/>
+          <div class="img-pv" id="addPv" style="margin-top:.5rem">// preview gambar muncul di sini</div>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Label</label>
+        <div class="chk-row">
+          <label class="chk"><input type="checkbox" id="addLn"/> [NEW] Baru</label>
+          <label class="chk"><input type="checkbox" id="addLh"/> [HOT] Populer</label>
+        </div>
+      </div>
+      <div class="fg"><label>Isi Prompt *</label><textarea id="addCo" rows="7" placeholder="// tempel teks prompt lengkap di sini..."></textarea></div>
+    </div>
+    <div class="err-bx" id="addErr" style="display:none"></div>
+    <div class="ok-bx" id="addOk">// OK: prompt berhasil dibagikan ke semua orang!</div>
+    <div class="mact-row">
+      <button class="btn-g" onclick="cm('mAdd')">[ESC] Batal</button>
+      <button class="btn-p" id="addBtn" onclick="doAdd()">[SEND] Kirim</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: DETAIL JB -->
+<div class="modal" id="mDet" onclick="if(event.target===this)cm('mDet')">
+  <div class="mbox">
+    <button class="mc" onclick="cm('mDet')">[X]</button>
+    <div class="m-hd" id="mDetHd"></div>
+    <div class="m-tabs">
+      <button class="mtb on" id="mtb1" onclick="swDet('p')">// Prompt</button>
+      <button class="mtb" id="mtb2" onclick="swDet('i')">// Info</button>
+    </div>
+    <div class="m-body">
+      <div id="tabP"><div class="ptw"><pre class="ptxt" id="detTxt"></pre></div></div>
+      <div id="tabI" style="display:none"><div class="m-info"><table id="detTbl"></table></div></div>
+    </div>
+    <div class="m-acts">
+      <button class="ma ma-cp" id="btnCp" onclick="doCp()">[CP] Salin</button>
+      <button class="ma ma-dl" onclick="doDl()">[DL] Unduh</button>
+      <button class="ma ma-sh" onclick="doSh()">[SH] Bagikan</button>
+      <button class="ma ma-fv" id="btnFv" onclick="doFv()">[*] Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: DETAIL FOTO -->
+<div class="modal" id="mFoto" onclick="if(event.target===this)cm('mFoto')">
+  <div class="mbox mbox-ft">
+    <button class="mc" onclick="cm('mFoto')">[X]</button>
+    <div class="fd-img" id="fdImg">// no image</div>
+    <div class="m-hd" id="mFotoHd"></div>
+    <div class="m-body"><div class="ptw"><pre class="ptxt" id="fotoTxt"></pre></div></div>
+    <div class="m-acts">
+      <button class="ma ma-cp" onclick="doCpFoto()">[CP] Salin</button>
+      <button class="ma ma-dl" onclick="doDlFoto()">[DL] Unduh</button>
+      <button class="ma ma-sh" onclick="doShFoto()">[SH] Bagikan</button>
+      <button class="ma ma-fv" id="fvFoto" onclick="doFvFoto()">[*] Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADMIN LOGIN -->
+<div class="modal" id="mAdL" onclick="if(event.target===this)cm('mAdL')">
+  <div class="mbox mbox-sm">
+    <button class="mc" onclick="cm('mAdL')">[X]</button>
+    <div style="text-align:center;padding:1.3rem 1.2rem .7rem">
+      <div style="font-family:var(--cond);font-size:3rem;font-weight:900;color:var(--p2);line-height:1">[ADMIN]</div>
+      <div style="font-family:var(--cond);font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-top:.4rem">Admin Panel</div>
+      <div style="font-family:var(--mono);font-size:.72rem;color:var(--txt2);margin-top:.3rem">// masukkan password admin</div>
+    </div>
+    <div class="fw" style="padding:0 1.2rem .2rem">
+      <div class="fg"><label>Password</label>
+        <input type="password" id="adPw" placeholder="// password..." onkeydown="if(event.key==='Enter')chkAd()"/>
+      </div>
+    </div>
+    <div class="err-bx" id="adErr" style="display:none;margin:.2rem 1.2rem .65rem">// ERROR: password salah</div>
+    <div class="mact-row">
+      <button class="btn-g" onclick="cm('mAdL')">[ESC] Batal</button>
+      <button class="btn-p" onclick="chkAd()">[OK] Masuk</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin" id="adminPanel">
+  <div class="ad-hd">
+    <h2>[ADMIN] // Panel Kontrol</h2>
+    <div style="display:flex;gap:.4rem">
+      <button class="btn-sm" onclick="adTab('jb')">[ JB ]</button>
+      <button class="btn-sm" onclick="adTab('ft')">[ FOTO ]</button>
+      <button class="btn-sm" onclick="syncNow()">[ SYNC ]</button>
+      <button class="btn-sm r" onclick="closeAdmin()">[ CLOSE ]</button>
+    </div>
+  </div>
+  <div class="ad-body">
+    <div class="ad-tab on" id="adJb">
+      <div class="ad-sec">// Prompt Jailbreak — TOTAL: <span id="jbAdCnt">0</span></div>
+      <div id="jbAdList"></div>
+    </div>
+    <div class="ad-tab" id="adFt">
+      <div class="ad-sec">// Prompt Foto — TOTAL: <span id="ftAdCnt">0</span></div>
+      <div id="ftAdList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastT"></span></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
